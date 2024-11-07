@@ -91,6 +91,39 @@ namespace PhongTro
             string electronic = txtElectOrderDetail.Text;
             string sql = "INSERT INTO CHI_TIET_HD VALUES ('" + id + "', '" + id_hdt + "', '" + time + "', '" + electronic + "', '" + water + "')";
 
+            string MaHDT = comboBoxContract.SelectedValue.ToString();
+
+            string checkElectricityWater = @"
+                    SELECT CSD, CSN 
+                    FROM CHI_TIET_HD 
+                    WHERE NgayThang = (SELECT MAX(NgayThang) FROM CHI_TIET_HD WHERE MaHDT = @MaHDT)
+                    AND MaHDT = @MaHDT";
+            SqlCommand checkCmd = new SqlCommand(checkElectricityWater, conn);
+            checkCmd.Parameters.AddWithValue("@MaHDT", MaHDT);
+
+            SqlDataReader checkReader = checkCmd.ExecuteReader();
+
+            if (checkReader.Read())
+            {
+                int previousCSD = int.Parse(checkReader["CSD"].ToString());
+                int previousCSN = int.Parse(checkReader["CSN"].ToString());
+
+
+                int currentCSD = int.Parse(txtWaterOrderDetail.Text);
+                int currentCSN = int.Parse(txtElectOrderDetail.Text);
+
+
+                if (currentCSD <= previousCSD || currentCSN <= previousCSN)
+                {
+                    MessageBox.Show("Chỉ số điện, nước tháng này phải lớn hơn chỉ số điện, nước tháng trước.");
+                    return;
+                }
+            }
+
+            checkReader.Close();
+
+
+
             SqlCommand cmd = new SqlCommand(sql, conn);
             cmd.ExecuteNonQuery();
             MessageBox.Show("Chi tiết hóa đơn đã thêm thành công!");
@@ -103,80 +136,143 @@ namespace PhongTro
             comboBoxContract.Text = dataGridViewLoadOrderDetail.Rows[e.RowIndex].Cells[1].Value.ToString();
             txtElectOrderDetail.Text = dataGridViewLoadOrderDetail.Rows[e.RowIndex].Cells[3].Value.ToString();
             txtWaterOrderDetail.Text = dataGridViewLoadOrderDetail.Rows[e.RowIndex].Cells[4].Value.ToString();
+            dateTimePickerDetailOrder.Text = dataGridViewLoadOrderDetail.Rows[e.RowIndex].Cells[2].Value.ToString();
         }
-
+         
         private void btnDetail_Click(object sender, EventArgs e)
         {
             string MaHDT = comboBoxContract.SelectedValue?.ToString();
+            string Month = dateTimePickerDetailOrder.Value.Month.ToString();
+            string Year = dateTimePickerDetailOrder.Value.Year.ToString();  
             if (string.IsNullOrEmpty(MaHDT))
             {
                 MessageBox.Show("Vui lòng chọn hợp đồng thuê.");
                 return;
             }
 
+            //string sql = @"
+            //    WITH LatestMonths AS (
+            //        SELECT 
+            //            MaHDT, 
+            //            NgayThang, 
+            //            CSD, 
+            //            CSN, 
+            //            ROW_NUMBER() OVER (PARTITION BY MaHDT ORDER BY NgayThang DESC) AS RowNum 
+            //        FROM CHI_TIET_HD
+            //    ),
+            //    PreviousMonth AS (
+            //        SELECT 
+            //            MaHDT,
+            //            CSD AS CSD_Truoc,
+            //            CSN AS CSN_Truoc,
+            //            NgayThang AS NgayThang_Truoc
+            //        FROM CHI_TIET_HD
+            //        WHERE 
+            //            (MONTH(NgayThang) = 12 AND YEAR(NgayThang) = YEAR((SELECT MAX(NgayThang) FROM CHI_TIET_HD)) - 1) 
+            //            OR (NgayThang = (SELECT MAX(NgayThang) FROM CHI_TIET_HD WHERE MaHDT = @MaHDT))
+            //    )
+            //    SELECT  
+            //        hdt.MaHDT, 
+            //        kh.TenKH AS KHÁCH,
+            //        phong.TenPhong AS PHÒNG,
+            //        CASE 
+            //            WHEN COALESCE(L1.CSD - COALESCE(L2.CSD, P.CSD_Truoc), L1.CSD) = 0 THEN L1.CSD * 3.5
+            //            ELSE (L1.CSD - COALESCE(L2.CSD, P.CSD_Truoc)) * 3.5
+            //        END AS ĐIỆN, 
+            //        CASE 
+            //            WHEN COALESCE(L1.CSN - COALESCE(L2.CSN, P.CSN_Truoc), L1.CSN) = 0 THEN L1.CSN * 15
+            //            ELSE (L1.CSN - COALESCE(L2.CSN, P.CSN_Truoc)) * 15
+            //        END AS NƯỚC, 
+            //        phong.Gia AS GIÁ,
+            //        phong.Gia + 
+            //            CASE 
+            //                WHEN COALESCE(L1.CSD - COALESCE(L2.CSD, P.CSD_Truoc), L1.CSD) = 0 THEN L1.CSD * 3.5
+            //                ELSE (L1.CSD - COALESCE(L2.CSD, P.CSD_Truoc)) * 3.5
+            //            END + 
+            //            CASE 
+            //                WHEN COALESCE(L1.CSN - COALESCE(L2.CSN, P.CSN_Truoc), L1.CSN) = 0 THEN L1.CSN * 15
+            //                ELSE (L1.CSN - COALESCE(L2.CSN, P.CSN_Truoc)) * 15
+            //            END AS TỔNG 
+            //    FROM 
+            //        HOP_DONG_THUE hdt
+            //    JOIN 
+            //        LatestMonths AS L1 ON hdt.MaHDT = L1.MaHDT AND L1.RowNum = 1
+            //    LEFT JOIN 
+            //        LatestMonths AS L2 ON hdt.MaHDT = L2.MaHDT AND L2.RowNum = 2
+            //    LEFT JOIN 
+            //        PreviousMonth AS P ON hdt.MaHDT = P.MaHDT
+            //    JOIN 
+            //        PHONG phong ON hdt.MaPhong = phong.MaPhong
+            //    JOIN 
+            //        KHACHHANG AS kh ON kh.MaKH = hdt.MaKH 
+            //    WHERE 
+            //        hdt.MaHDT = @MaHDT;";
+
+
             string sql = @"
-                WITH LatestMonths AS (
-                    SELECT 
-                        MaHDT, 
-                        NgayThang, 
-                        CSD, 
-                        CSN, 
-                        ROW_NUMBER() OVER (PARTITION BY MaHDT ORDER BY NgayThang DESC) AS RowNum 
-                    FROM CHI_TIET_HD
-                ),
-                PreviousMonth AS (
-                    SELECT 
-                        MaHDT,
-                        CSD AS CSD_Truoc,
-                        CSN AS CSN_Truoc,
-                        NgayThang AS NgayThang_Truoc
-                    FROM CHI_TIET_HD
-                    WHERE 
-                        (MONTH(NgayThang) = 12 AND YEAR(NgayThang) = YEAR((SELECT MAX(NgayThang) FROM CHI_TIET_HD)) - 1) 
-                        OR (NgayThang = (SELECT MAX(NgayThang) FROM CHI_TIET_HD WHERE MaHDT = @MaHDT))
-                )
-                SELECT  
-                    hdt.MaHDT, 
-                    kh.TenKH AS KHÁCH,
-                    phong.TenPhong AS PHÒNG,
-                    CASE 
-                        WHEN COALESCE(L1.CSD - COALESCE(L2.CSD, P.CSD_Truoc), L1.CSD) = 0 THEN L1.CSD * 3.5
-                        ELSE (L1.CSD - COALESCE(L2.CSD, P.CSD_Truoc)) * 3.5
-                    END AS ĐIỆN, 
-                    CASE 
-                        WHEN COALESCE(L1.CSN - COALESCE(L2.CSN, P.CSN_Truoc), L1.CSN) = 0 THEN L1.CSN * 15
-                        ELSE (L1.CSN - COALESCE(L2.CSN, P.CSN_Truoc)) * 15
-                    END AS NƯỚC, 
-                    phong.Gia AS GIÁ,
-                    phong.Gia + 
-                        CASE 
-                            WHEN COALESCE(L1.CSD - COALESCE(L2.CSD, P.CSD_Truoc), L1.CSD) = 0 THEN L1.CSD * 3.5
-                            ELSE (L1.CSD - COALESCE(L2.CSD, P.CSD_Truoc)) * 3.5
-                        END + 
-                        CASE 
-                            WHEN COALESCE(L1.CSN - COALESCE(L2.CSN, P.CSN_Truoc), L1.CSN) = 0 THEN L1.CSN * 15
-                            ELSE (L1.CSN - COALESCE(L2.CSN, P.CSN_Truoc)) * 15
-                        END AS TỔNG 
-                FROM 
-                    HOP_DONG_THUE hdt
-                JOIN 
-                    LatestMonths AS L1 ON hdt.MaHDT = L1.MaHDT AND L1.RowNum = 1
-                LEFT JOIN 
-                    LatestMonths AS L2 ON hdt.MaHDT = L2.MaHDT AND L2.RowNum = 2
-                LEFT JOIN 
-                    PreviousMonth AS P ON hdt.MaHDT = P.MaHDT
-                JOIN 
-                    PHONG phong ON hdt.MaPhong = phong.MaPhong
-                JOIN 
-                    KHACHHANG AS kh ON kh.MaKH = hdt.MaKH 
-                WHERE 
-                    hdt.MaHDT = @MaHDT;";
+    WITH SelectedMonth AS (
+        SELECT 
+            MaHDT, 
+            NgayThang, 
+            CSD, 
+            CSN,
+            ROW_NUMBER() OVER (PARTITION BY MaHDT ORDER BY NgayThang DESC) AS RowNum
+        FROM 
+            CHI_TIET_HD
+        WHERE 
+            MaHDT = @MaHDT
+            AND (
+                (MONTH(NgayThang) = @Month AND YEAR(NgayThang) = @Year) 
+                OR (MONTH(NgayThang) = @Month - 1 AND YEAR(NgayThang) = @Year)
+                OR (MONTH(NgayThang) = 12 AND YEAR(NgayThang) = @Year - 1 AND @Month = 1)
+            )
+    )
+    SELECT  
+        hdt.MaHDT, 
+        kh.TenKH AS KHÁCH,
+        phong.TenPhong AS PHÒNG,
+        CASE 
+            WHEN COALESCE(S1.CSD - COALESCE(S2.CSD, 0), S1.CSD) = S1.CSD THEN S1.CSD * 3500
+            ELSE (S1.CSD - COALESCE(S2.CSD, 0)) * 3500
+        END AS ĐIỆN, 
+        CASE 
+            WHEN COALESCE(S1.CSN - COALESCE(S2.CSN, 0), S1.CSN) = S1.CSN THEN S1.CSN * 15000
+            ELSE (S1.CSN - COALESCE(S2.CSN, 0)) * 15000
+        END AS NƯỚC, 
+        phong.Gia AS GIÁ,
+        phong.Gia + 
+            CASE 
+                WHEN COALESCE(S1.CSD - COALESCE(S2.CSD, 0), S1.CSD) = S1.CSD THEN S1.CSD * 3500
+                ELSE (S1.CSD - COALESCE(S2.CSD, 0)) * 3500
+            END + 
+            CASE 
+                WHEN COALESCE(S1.CSN - COALESCE(S2.CSN, 0), S1.CSN) = S1.CSN THEN S1.CSN * 15000
+                ELSE (S1.CSN - COALESCE(S2.CSN, 0)) * 15000
+            END AS TỔNG 
+    FROM 
+        HOP_DONG_THUE hdt
+    JOIN 
+        SelectedMonth AS S1 ON hdt.MaHDT = S1.MaHDT AND S1.RowNum = 1
+    LEFT JOIN 
+        SelectedMonth AS S2 ON hdt.MaHDT = S2.MaHDT AND S2.RowNum = 2
+    JOIN 
+        PHONG phong ON hdt.MaPhong = phong.MaPhong
+    JOIN 
+        KHACHHANG AS kh ON kh.MaKH = hdt.MaKH 
+    WHERE 
+        hdt.MaHDT = @MaHDT;
+";
+
+
 
 
 
             using (SqlCommand cmd = new SqlCommand(sql, conn))
             {
                 cmd.Parameters.AddWithValue("@MaHDT", MaHDT);
+                cmd.Parameters.AddWithValue("@Month", Month);
+                cmd.Parameters.AddWithValue("@Year", Year);
+
 
                 try
                 {
@@ -200,6 +296,12 @@ namespace PhongTro
                     MessageBox.Show($"Lỗi: {ex.Message}");
                 }
             }
+
+            //string sql = "SELECT * FROM CHI_TIET_HD WHERE MaHDT = '" + MaHDT + "'";
+            //SqlCommand cmd = new SqlCommand(sql, conn);
+            //cmd.ExecuteNonQuery();
+            ////MessageBox.Show("Xoá thành công");
+            //func.LoadOrderDetail(dataGridViewLoadOrderDetail, conn, sql);
         }
 
         private void btnResetOrderDetail_Click(object sender, EventArgs e)
@@ -229,6 +331,7 @@ namespace PhongTro
             string time = dateTimePickerDetailOrder.Value.ToString("yyyy-MM-dd");
             string water = txtWaterOrderDetail.Text;
             string electronic = txtElectOrderDetail.Text;
+            
             string sql = "UPDATE CHI_TIET_HD SET MaHDT = '" + id_hdt + "', NgayThang = '" + time + "', CSD = '" + electronic + "', CSN = '" + water + "' WHERE MaCTHD = '" + id + "'";
 
 
@@ -236,6 +339,16 @@ namespace PhongTro
             cmd.ExecuteNonQuery();
             MessageBox.Show("Chi tiết hóa đơn đã được cập nhật thành công!");
             func.LoadOrderDetail(dataGridViewLoadOrderDetail, conn, "SELECT * FROM CHI_TIET_HD");
+        }
+
+        private void comboBoxContract_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            string MaHDT = comboBoxContract.SelectedValue?.ToString();
+            string sql = "SELECT * FROM CHI_TIET_HD WHERE MaHDT = '" + MaHDT + "' ORDER BY YEAR(NgayThang) DESC, MONTH(NgayThang) DESC";
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            cmd.ExecuteNonQuery();
+            func.LoadOrderDetail(dataGridViewLoadOrderDetail, conn, sql);
         }
     }
 }

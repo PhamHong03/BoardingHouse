@@ -127,6 +127,21 @@ namespace PhongTro
         {
 
         }
+
+        private void btnDeleteRoom_Click(object sender, EventArgs e)
+        {
+            string id = txtIdRoom.Text;
+
+            string sql = "DELETE FROM PHONG WHERE MaPhong = '" + id + "'";
+            SqlCommand command = new SqlCommand(sql, conn);
+            command.ExecuteNonQuery();
+            MessageBox.Show("Xóa phòng thành công");
+            string query = "SELECT P.MaPhong, P.TenPhong, P.Gia, P.TrangThai, LP.TenLoai AS 'TENLOAI' FROM PHONG P JOIN LOAIPHONG LP ON P.MaLoai = LP.MaLoai";
+            //func.LoadDataGridView(dataGridViewLoadRoom, conn, "SELECT * FROM PHONG");
+
+            func.LoadRoom(dataGridViewLoadRoom, conn, query);
+
+        }
     }
 
 }

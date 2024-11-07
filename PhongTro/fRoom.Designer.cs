@@ -191,6 +191,7 @@
             btnDeleteRoom.TabIndex = 14;
             btnDeleteRoom.Text = "Xóa ";
             btnDeleteRoom.UseVisualStyleBackColor = false;
+            btnDeleteRoom.Click += btnDeleteRoom_Click;
             // 
             // btnEditRoom
             // 

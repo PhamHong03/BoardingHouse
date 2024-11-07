@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>PhongTro</id>
+    <version>1.0.0</version>
+    <authors>PhongTro</authors>
+    <description>Package Description</description>
+    <repository type="git" commit="77011c48b82b12d6bf48a8f96d69d5aba0ccf54b" />
+    <dependencies>
+      <group targetFramework="net8.0-windows7.0">
+        <dependency id="Microsoft.Data.SqlClient" version="5.2.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.ReportingServices.ReportViewerControl.Winforms" version="150.1652.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework="net8.0-windows7.0">
+        <frameworkReference name="Microsoft.WindowsDesktop.App.WindowsForms" />
+      </group>
+    </frameworkReferences>
+  </metadata>
+  <files>
+    <file src="D:\HocPhanCT\CT291\PhongTro\PhongTro\bin\Debug\net8.0-windows\PhongTro.runtimeconfig.json" target="lib\net8.0-windows7.0\PhongTro.runtimeconfig.json" />
+    <file src="D:\HocPhanCT\CT291\PhongTro\PhongTro\bin\Debug\net8.0-windows\PhongTro.dll" target="lib\net8.0-windows7.0\PhongTro.dll" />
+  </files>
+</package>

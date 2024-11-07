@@ -139,7 +139,7 @@ namespace PhongTro
             if (e.KeyCode == Keys.Enter)
             {
                 string tukhoa = txtSearchCustomer.Text;
-                string sql = "SELECT * FROM KHACHHANG WHERE TenKH LIKE %'" + tukhoa + "'%";
+                string sql = "SELECT * FROM KHACHHANG WHERE TenKH LIKE '%" + tukhoa + "%'";
 
                 func.LoadDataGridView(dataGridViewLoadCustomer, conn, sql);
             }

@@ -182,6 +182,7 @@
             panelBig.Name = "panelBig";
             panelBig.Size = new Size(1178, 783);
             panelBig.TabIndex = 2;
+            panelBig.Paint += panelBig_Paint;
             // 
             // fDashboard
             // 

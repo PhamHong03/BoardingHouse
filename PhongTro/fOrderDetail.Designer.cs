@@ -146,7 +146,6 @@
             label3.Size = new Size(68, 20);
             label3.TabIndex = 46;
             label3.Text = "Hệ số 3.5";
-//            label3.Click += label3_Click;
             // 
             // btnDetail
             // 
@@ -187,6 +186,7 @@
             comboBoxContract.Size = new Size(188, 28);
             comboBoxContract.TabIndex = 42;
             comboBoxContract.ValueMember = "MaHDT";
+            comboBoxContract.SelectedIndexChanged += comboBoxContract_SelectedIndexChanged;
             // 
             // txtIdOrder
             // 

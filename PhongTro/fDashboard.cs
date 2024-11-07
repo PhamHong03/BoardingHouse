@@ -28,10 +28,10 @@ namespace PhongTro
         private void btnRoomMn_Click(object sender, EventArgs e)
         {
             fRoom roomForm = new fRoom();
-            Point pictureBoxLocation = panelBig.PointToScreen(Point.Empty); // Thay "myPictureBox" bằng tên PictureBox của bạn
-            roomForm.StartPosition = FormStartPosition.Manual; // Đặt vị trí thủ công
-            roomForm.Location = pictureBoxLocation; // Đặt vị trí
-            roomForm.Show(); // Hiển thị form
+            Point pictureBoxLocation = panelBig.PointToScreen(Point.Empty);
+            roomForm.StartPosition = FormStartPosition.Manual;
+            roomForm.Location = pictureBoxLocation;
+            roomForm.Show();
         }
 
         private void btnExitDashboard_Click(object sender, EventArgs e)
@@ -42,28 +42,33 @@ namespace PhongTro
         private void btnCustomerMn_Click(object sender, EventArgs e)
         {
             fCustomers roomForm = new fCustomers();
-            Point pictureBoxLocation = panelBig.PointToScreen(Point.Empty); // Thay "myPictureBox" bằng tên PictureBox của bạn
-            roomForm.StartPosition = FormStartPosition.Manual; // Đặt vị trí thủ công
-            roomForm.Location = pictureBoxLocation; // Đặt vị trí
-            roomForm.Show(); // Hiển thị form
+            Point pictureBoxLocation = panelBig.PointToScreen(Point.Empty);
+            roomForm.StartPosition = FormStartPosition.Manual;
+            roomForm.Location = pictureBoxLocation;
+            roomForm.Show();
         }
 
         private void btnContractMn_Click(object sender, EventArgs e)
         {
             fContract roomForm = new fContract();
-            Point pictureBoxLocation = panelBig.PointToScreen(Point.Empty); // Thay "myPictureBox" bằng tên PictureBox của bạn
-            roomForm.StartPosition = FormStartPosition.Manual; // Đặt vị trí thủ công
-            roomForm.Location = pictureBoxLocation; // Đặt vị trí
+            Point pictureBoxLocation = panelBig.PointToScreen(Point.Empty);
+            roomForm.StartPosition = FormStartPosition.Manual;
+            roomForm.Location = pictureBoxLocation;
             roomForm.Show();
         }
 
         private void btnOrderDetail_Click(object sender, EventArgs e)
         {
             fOrderDetail roomForm = new fOrderDetail();
-            Point pictureBoxLocation = panelBig.PointToScreen(Point.Empty); // Thay "myPictureBox" bằng tên PictureBox của bạn
-            roomForm.StartPosition = FormStartPosition.Manual; // Đặt vị trí thủ công
-            roomForm.Location = pictureBoxLocation; // Đặt vị trí
+            Point pictureBoxLocation = panelBig.PointToScreen(Point.Empty);
+            roomForm.StartPosition = FormStartPosition.Manual;
+            roomForm.Location = pictureBoxLocation;
             roomForm.Show();
+        }
+
+        private void panelBig_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

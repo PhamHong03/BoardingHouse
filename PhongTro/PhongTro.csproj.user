@@ -16,6 +16,15 @@
     <Compile Update="fOrderDetail.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="FormsPlot.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="fPrintRoom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="fReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="fRoom.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -99,6 +99,7 @@ namespace PhongTro
             adapter.Fill(dataTable);
             dataGridView.DataSource = dataTable;
 
+
             dataGridView.Columns["MaCTHD"].HeaderText = "HÓA ĐƠN";           
             dataGridView.Columns["MaHDT"].HeaderText = "HỢP ĐỒNG";   
             dataGridView.Columns["NgayThang"].HeaderText = "THỜI GIAN";
