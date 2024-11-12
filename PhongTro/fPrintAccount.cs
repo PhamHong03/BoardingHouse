@@ -8,26 +8,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace PhongTro
 {
-    public partial class fPrintRoom : Form
+    public partial class fPrintAccount : Form
     {
         SqlConnection conn = new SqlConnection();
 
         Function func = new Function();
-        public fPrintRoom()
+        public fPrintAccount()
         {
             InitializeComponent();
         }
 
-        private void fPrintRoom_Load(object sender, EventArgs e)
+        private void fPrintAccount_Load(object sender, EventArgs e)
         {
             func.Connect(conn);
-            string query = "SELECT P.MaPhong, P.TenPhong, P.Gia, P.TrangThai, LP.TenLoai AS 'TENLOAI' FROM PHONG P JOIN LOAIPHONG LP ON P.MaLoai = LP.MaLoai";
-            //func.LoadDataGridView(dataGridViewLoadRoom, conn, "SELECT * FROM PHONG");
 
-            func.LoadRoom(dataGridView1, conn, query);
+            func.LoadAccount(dataGridView1, conn, "SELECT * FROM ACCOUNT");
         }
     }
 }

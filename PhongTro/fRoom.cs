@@ -142,6 +142,25 @@ namespace PhongTro
             func.LoadRoom(dataGridViewLoadRoom, conn, query);
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            fPrintRoom fPrintRoom = new fPrintRoom();
+            Point pictureBoxLocation = groupBox1.PointToScreen(Point.Empty);
+            fPrintRoom.StartPosition = FormStartPosition.Manual;
+            fPrintRoom.Location = pictureBoxLocation;
+            fPrintRoom.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }

@@ -69,7 +69,7 @@
             groupBox1.Controls.Add(panel1);
             groupBox1.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 163);
             groupBox1.ForeColor = Color.DarkBlue;
-            groupBox1.Location = new Point(12, 12);
+            groupBox1.Location = new Point(0, 3);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(1154, 759);
             groupBox1.TabIndex = 0;
@@ -99,7 +99,6 @@
             btnSearchCustomer.Text = "Tìm kiếm ";
             btnSearchCustomer.TextAlign = ContentAlignment.MiddleRight;
             btnSearchCustomer.UseVisualStyleBackColor = false;
-//            btnSearchCustomer.KeyDown += btnSearchCustomer_KeyDown;
             // 
             // panel2
             // 
@@ -236,6 +235,7 @@
             btnPrint.TabIndex = 12;
             btnPrint.Text = "In file ";
             btnPrint.UseVisualStyleBackColor = false;
+            btnPrint.Click += btnPrint_Click;
             // 
             // comboBoxLoadGender
             // 

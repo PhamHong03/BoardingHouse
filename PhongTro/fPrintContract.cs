@@ -11,23 +11,22 @@ using System.Windows.Forms;
 
 namespace PhongTro
 {
-    public partial class fPrintRoom : Form
+    public partial class fPrintContract : Form
     {
         SqlConnection conn = new SqlConnection();
 
         Function func = new Function();
-        public fPrintRoom()
+
+        public fPrintContract()
         {
             InitializeComponent();
         }
 
-        private void fPrintRoom_Load(object sender, EventArgs e)
+        private void fPrintContract_Load(object sender, EventArgs e)
         {
             func.Connect(conn);
-            string query = "SELECT P.MaPhong, P.TenPhong, P.Gia, P.TrangThai, LP.TenLoai AS 'TENLOAI' FROM PHONG P JOIN LOAIPHONG LP ON P.MaLoai = LP.MaLoai";
-            //func.LoadDataGridView(dataGridViewLoadRoom, conn, "SELECT * FROM PHONG");
-
-            func.LoadRoom(dataGridView1, conn, query);
+            string query = "SELECT H.MaHDT, H.NGAY_THUE, H.THOI_HAN, H.NOI_DUNG, K.TenKH AS 'KH', P.TenPhong AS 'TEN PHONG' FROM HOP_DONG_THUE H JOIN KHACHHANG K ON H.MaKH = K.MaKH JOIN PHONG P ON H.MaPhong = P.MaPhong";
+            func.LoadContract(dataGridView1, conn, query);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace PhongTro
 {
-    partial class fPrintRoom
+    partial class fPrintContract
     {
         /// <summary>
         /// Required designer variable.
@@ -38,36 +38,36 @@
             label1.AutoSize = true;
             label1.Font = new Font("Times New Roman", 18F, FontStyle.Bold, GraphicsUnit.Point, 163);
             label1.ForeColor = Color.DarkBlue;
-            label1.Location = new Point(431, 26);
+            label1.Location = new Point(411, 26);
             label1.Name = "label1";
-            label1.Size = new Size(321, 35);
+            label1.Size = new Size(464, 35);
             label1.TabIndex = 0;
-            label1.Text = "DANH SÁCH PHÒNG ";
+            label1.Text = "DANH SÁCH HỢP ĐỒNG THUÊ ";
             // 
             // dataGridView1
             // 
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.BackgroundColor = Color.AliceBlue;
+            dataGridView1.BorderStyle = BorderStyle.None;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(12, 97);
+            dataGridView1.Location = new Point(4, 80);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(1154, 674);
+            dataGridView1.Size = new Size(1154, 688);
             dataGridView1.TabIndex = 1;
             // 
-            // fPrintRoom
+            // fPrintContract
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LavenderBlush;
-            ClientSize = new Size(1178, 783);
+            ClientSize = new Size(1170, 780);
             Controls.Add(dataGridView1);
             Controls.Add(label1);
-            ForeColor = Color.Black;
             FormBorderStyle = FormBorderStyle.None;
-            Name = "fPrintRoom";
-            Text = "fPrintRoom";
-            Load += fPrintRoom_Load;
+            Name = "fPrintContract";
+            Text = "fPrintContract";
+            Load += fPrintContract_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();

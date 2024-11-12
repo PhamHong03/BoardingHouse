@@ -36,6 +36,7 @@
             dataGridViewLoadRoom = new DataGridView();
             label6 = new Label();
             panel1 = new Panel();
+            button2 = new Button();
             btnResetRoom = new Button();
             btnSaveRoom = new Button();
             btnDeleteRoom = new Button();
@@ -64,7 +65,7 @@
             groupBox1.Controls.Add(textBox3);
             groupBox1.Controls.Add(panel2);
             groupBox1.Controls.Add(panel1);
-            groupBox1.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 163);
+            groupBox1.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 163);
             groupBox1.ForeColor = Color.MidnightBlue;
             groupBox1.Location = new Point(1, 3);
             groupBox1.Name = "groupBox1";
@@ -72,11 +73,12 @@
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Thông tin phòng ";
+            groupBox1.Enter += groupBox1_Enter;
             // 
             // button1
             // 
             button1.BackColor = Color.AliceBlue;
-            button1.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 163);
+            button1.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold);
             button1.Image = (Image)resources.GetObject("button1.Image");
             button1.ImageAlign = ContentAlignment.MiddleLeft;
             button1.Location = new Point(1012, 46);
@@ -86,6 +88,7 @@
             button1.Text = "Tìm kiếm ";
             button1.TextAlign = ContentAlignment.MiddleRight;
             button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // textBox3
             // 
@@ -134,6 +137,7 @@
             // panel1
             // 
             panel1.BackColor = Color.White;
+            panel1.Controls.Add(button2);
             panel1.Controls.Add(btnResetRoom);
             panel1.Controls.Add(btnSaveRoom);
             panel1.Controls.Add(btnDeleteRoom);
@@ -149,19 +153,33 @@
             panel1.Controls.Add(label2);
             panel1.Controls.Add(txtIdRoom);
             panel1.Controls.Add(label1);
+            panel1.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold);
             panel1.Location = new Point(3, 115);
             panel1.Name = "panel1";
             panel1.Size = new Size(1162, 199);
             panel1.TabIndex = 0;
             // 
+            // button2
+            // 
+            button2.BackColor = Color.AliceBlue;
+            button2.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold);
+            button2.ImageAlign = ContentAlignment.MiddleLeft;
+            button2.Location = new Point(924, 122);
+            button2.Name = "button2";
+            button2.Size = new Size(99, 50);
+            button2.TabIndex = 17;
+            button2.Text = "In";
+            button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click;
+            // 
             // btnResetRoom
             // 
             btnResetRoom.BackColor = Color.AliceBlue;
-            btnResetRoom.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 163);
+            btnResetRoom.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold);
             btnResetRoom.ImageAlign = ContentAlignment.MiddleLeft;
-            btnResetRoom.Location = new Point(1009, 128);
+            btnResetRoom.Location = new Point(1035, 122);
             btnResetRoom.Name = "btnResetRoom";
-            btnResetRoom.Size = new Size(125, 56);
+            btnResetRoom.Size = new Size(99, 53);
             btnResetRoom.TabIndex = 16;
             btnResetRoom.Text = "Đặt lại ";
             btnResetRoom.UseVisualStyleBackColor = false;
@@ -170,11 +188,11 @@
             // btnSaveRoom
             // 
             btnSaveRoom.BackColor = Color.AliceBlue;
-            btnSaveRoom.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 163);
+            btnSaveRoom.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold);
             btnSaveRoom.ImageAlign = ContentAlignment.MiddleLeft;
-            btnSaveRoom.Location = new Point(617, 128);
+            btnSaveRoom.Location = new Point(570, 124);
             btnSaveRoom.Name = "btnSaveRoom";
-            btnSaveRoom.Size = new Size(114, 56);
+            btnSaveRoom.Size = new Size(104, 48);
             btnSaveRoom.TabIndex = 15;
             btnSaveRoom.Text = "Lưu ";
             btnSaveRoom.UseVisualStyleBackColor = false;
@@ -183,11 +201,11 @@
             // btnDeleteRoom
             // 
             btnDeleteRoom.BackColor = Color.AliceBlue;
-            btnDeleteRoom.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 163);
+            btnDeleteRoom.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold);
             btnDeleteRoom.ImageAlign = ContentAlignment.MiddleLeft;
-            btnDeleteRoom.Location = new Point(749, 128);
+            btnDeleteRoom.Location = new Point(685, 124);
             btnDeleteRoom.Name = "btnDeleteRoom";
-            btnDeleteRoom.Size = new Size(114, 56);
+            btnDeleteRoom.Size = new Size(107, 48);
             btnDeleteRoom.TabIndex = 14;
             btnDeleteRoom.Text = "Xóa ";
             btnDeleteRoom.UseVisualStyleBackColor = false;
@@ -196,11 +214,11 @@
             // btnEditRoom
             // 
             btnEditRoom.BackColor = Color.AliceBlue;
-            btnEditRoom.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 163);
+            btnEditRoom.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold);
             btnEditRoom.ImageAlign = ContentAlignment.MiddleLeft;
-            btnEditRoom.Location = new Point(879, 128);
+            btnEditRoom.Location = new Point(808, 123);
             btnEditRoom.Name = "btnEditRoom";
-            btnEditRoom.Size = new Size(114, 56);
+            btnEditRoom.Size = new Size(99, 50);
             btnEditRoom.TabIndex = 13;
             btnEditRoom.Text = "Sửa ";
             btnEditRoom.UseVisualStyleBackColor = false;
@@ -209,11 +227,11 @@
             // btnAddRoom
             // 
             btnAddRoom.BackColor = Color.AliceBlue;
-            btnAddRoom.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 163);
+            btnAddRoom.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold);
             btnAddRoom.ImageAlign = ContentAlignment.MiddleLeft;
-            btnAddRoom.Location = new Point(481, 128);
+            btnAddRoom.Location = new Point(450, 124);
             btnAddRoom.Name = "btnAddRoom";
-            btnAddRoom.Size = new Size(114, 56);
+            btnAddRoom.Size = new Size(103, 48);
             btnAddRoom.TabIndex = 12;
             btnAddRoom.Text = "Thêm ";
             btnAddRoom.UseVisualStyleBackColor = false;
@@ -232,10 +250,10 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 12F, FontStyle.Bold | FontStyle.Italic);
+            label5.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold);
             label5.Location = new Point(852, 31);
             label5.Name = "label5";
-            label5.Size = new Size(55, 28);
+            label5.Size = new Size(61, 25);
             label5.TabIndex = 8;
             label5.Text = "Giá: ";
             // 
@@ -252,10 +270,10 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 12F, FontStyle.Bold | FontStyle.Italic);
+            label4.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold);
             label4.Location = new Point(461, 31);
             label4.Name = "label4";
-            label4.Size = new Size(123, 28);
+            label4.Size = new Size(130, 25);
             label4.TabIndex = 6;
             label4.Text = "Trạng thái: ";
             // 
@@ -264,7 +282,7 @@
             comboBoxLoadTypeRoom.DisplayMember = "TenLoai";
             comboBoxLoadTypeRoom.Font = new Font("Segoe UI", 10.2F);
             comboBoxLoadTypeRoom.FormattingEnabled = true;
-            comboBoxLoadTypeRoom.Location = new Point(162, 145);
+            comboBoxLoadTypeRoom.Location = new Point(162, 147);
             comboBoxLoadTypeRoom.Name = "comboBoxLoadTypeRoom";
             comboBoxLoadTypeRoom.Size = new Size(256, 31);
             comboBoxLoadTypeRoom.TabIndex = 5;
@@ -273,10 +291,10 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 12F, FontStyle.Bold | FontStyle.Italic);
+            label3.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold);
             label3.Location = new Point(17, 153);
             label3.Name = "label3";
-            label3.Size = new Size(129, 28);
+            label3.Size = new Size(139, 25);
             label3.TabIndex = 4;
             label3.Text = "Loại phòng: ";
             // 
@@ -291,10 +309,10 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 12F, FontStyle.Bold | FontStyle.Italic);
+            label2.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold);
             label2.Location = new Point(17, 88);
             label2.Name = "label2";
-            label2.Size = new Size(123, 28);
+            label2.Size = new Size(133, 25);
             label2.TabIndex = 2;
             label2.Text = "Tên phòng: ";
             // 
@@ -310,10 +328,10 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 163);
+            label1.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold);
             label1.Location = new Point(15, 31);
             label1.Name = "label1";
-            label1.Size = new Size(118, 28);
+            label1.Size = new Size(130, 25);
             label1.TabIndex = 0;
             label1.Text = "Mã phòng: ";
             // 
@@ -362,5 +380,6 @@
         private Button btnAddRoom;
         private DataGridView dataGridViewLoadRoom;
         private Label label6;
+        private Button button2;
     }
 }

@@ -158,6 +158,7 @@
             btnPrintContract.TabIndex = 14;
             btnPrintContract.Text = "In file";
             btnPrintContract.UseVisualStyleBackColor = false;
+            btnPrintContract.Click += btnPrintContract_Click;
             // 
             // btnSaveContract
             // 
@@ -225,7 +226,6 @@
             txtContentContract.Name = "txtContentContract";
             txtContentContract.Size = new Size(184, 28);
             txtContentContract.TabIndex = 1;
-//            txtContentContract.TextChanged += txtContentContract_TextChanged;
             // 
             // label4
             // 

@@ -13,16 +13,13 @@ namespace PhongTro
     public partial class fDashboard() : Form
     {
         public string name = "";
-        //public fDashboard()
-        //{
-        //    InitializeComponent();
-        //    //this.name = s;
-        //}
-        public fDashboard(string s) : this()
+        public string displayname = "";
+        public fDashboard(string s, string s1) : this()
         {
             InitializeComponent();
-            this.name = s;
-            labelUsername.Text = s;
+            //this.name = s;
+            this.displayname = s1;
+            labelUsername.Text = "Xin chào, " + s1 + "!";
         }
 
         private void btnRoomMn_Click(object sender, EventArgs e)
@@ -69,6 +66,15 @@ namespace PhongTro
         private void panelBig_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void btnAccount_Click(object sender, EventArgs e)
+        {
+            fAccount roomForm = new fAccount();
+            Point pictureBoxLocation = panelBig.PointToScreen(Point.Empty);
+            roomForm.StartPosition = FormStartPosition.Manual;
+            roomForm.Location = pictureBoxLocation;
+            roomForm.Show();
         }
     }
 }

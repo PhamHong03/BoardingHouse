@@ -81,7 +81,7 @@ namespace PhongTro
             MessageBox.Show("Thêm khách hàng thành công");
             func.LoadDataGridView(dataGridViewLoadCustomer, conn, "SELECT * FROM KHACHHANG");
         }
-            
+
         private void btnEditCustomer_Click(object sender, EventArgs e)
         {
             string id = txtIdCustomer.Text;
@@ -143,6 +143,15 @@ namespace PhongTro
 
                 func.LoadDataGridView(dataGridViewLoadCustomer, conn, sql);
             }
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            fPrintCustomer fPrintRoom = new fPrintCustomer();
+            Point pictureBoxLocation = groupBox1.PointToScreen(Point.Empty);
+            fPrintRoom.StartPosition = FormStartPosition.Manual;
+            fPrintRoom.Location = pictureBoxLocation;
+            fPrintRoom.Show();
         }
     }
 }

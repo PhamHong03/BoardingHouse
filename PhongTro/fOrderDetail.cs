@@ -138,12 +138,12 @@ namespace PhongTro
             txtWaterOrderDetail.Text = dataGridViewLoadOrderDetail.Rows[e.RowIndex].Cells[4].Value.ToString();
             dateTimePickerDetailOrder.Text = dataGridViewLoadOrderDetail.Rows[e.RowIndex].Cells[2].Value.ToString();
         }
-         
+
         private void btnDetail_Click(object sender, EventArgs e)
         {
             string MaHDT = comboBoxContract.SelectedValue?.ToString();
             string Month = dateTimePickerDetailOrder.Value.Month.ToString();
-            string Year = dateTimePickerDetailOrder.Value.Year.ToString();  
+            string Year = dateTimePickerDetailOrder.Value.Year.ToString();
             if (string.IsNullOrEmpty(MaHDT))
             {
                 MessageBox.Show("Vui lòng chọn hợp đồng thuê.");
@@ -331,7 +331,7 @@ namespace PhongTro
             string time = dateTimePickerDetailOrder.Value.ToString("yyyy-MM-dd");
             string water = txtWaterOrderDetail.Text;
             string electronic = txtElectOrderDetail.Text;
-            
+
             string sql = "UPDATE CHI_TIET_HD SET MaHDT = '" + id_hdt + "', NgayThang = '" + time + "', CSD = '" + electronic + "', CSN = '" + water + "' WHERE MaCTHD = '" + id + "'";
 
 
@@ -349,6 +349,15 @@ namespace PhongTro
             SqlCommand cmd = new SqlCommand(sql, conn);
             cmd.ExecuteNonQuery();
             func.LoadOrderDetail(dataGridViewLoadOrderDetail, conn, sql);
+        }
+
+        private void btnPrintOrderDetail_Click(object sender, EventArgs e)
+        {
+            fPrintOrderDetail fPrintRoom = new fPrintOrderDetail();
+            Point pictureBoxLocation = groupBox1.PointToScreen(Point.Empty);
+            fPrintRoom.StartPosition = FormStartPosition.Manual;
+            fPrintRoom.Location = pictureBoxLocation;
+            fPrintRoom.Show();
         }
     }
 }

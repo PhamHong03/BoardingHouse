@@ -289,6 +289,7 @@
             btnPrintOrderDetail.TabIndex = 36;
             btnPrintOrderDetail.Text = "In file";
             btnPrintOrderDetail.UseVisualStyleBackColor = false;
+            btnPrintOrderDetail.Click += btnPrintOrderDetail_Click;
             // 
             // btnSaveOrderDetail
             // 

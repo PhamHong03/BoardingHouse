@@ -119,3 +119,8 @@ D:\HocPhanCT\CT291\PhongTro\PhongTro\bin\Debug\net8.0-windows\runtimes\osx\nativ
 D:\HocPhanCT\CT291\PhongTro\PhongTro\bin\Debug\net8.0-windows\runtimes\win-arm64\native\libSkiaSharp.dll
 D:\HocPhanCT\CT291\PhongTro\PhongTro\bin\Debug\net8.0-windows\runtimes\win-x64\native\libSkiaSharp.dll
 D:\HocPhanCT\CT291\PhongTro\PhongTro\bin\Debug\net8.0-windows\runtimes\win-x86\native\libSkiaSharp.dll
+D:\HocPhanCT\CT291\PhongTro\PhongTro\obj\Debug\net8.0-windows\PhongTro.fPrintCustomer.resources
+D:\HocPhanCT\CT291\PhongTro\PhongTro\obj\Debug\net8.0-windows\PhongTro.fPrintContract.resources
+D:\HocPhanCT\CT291\PhongTro\PhongTro\obj\Debug\net8.0-windows\PhongTro.fPrintOrderDetail.resources
+D:\HocPhanCT\CT291\PhongTro\PhongTro\obj\Debug\net8.0-windows\PhongTro.fAccount.resources
+D:\HocPhanCT\CT291\PhongTro\PhongTro\obj\Debug\net8.0-windows\PhongTro.fPrintAccount.resources

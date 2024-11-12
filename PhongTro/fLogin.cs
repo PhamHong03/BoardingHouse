@@ -35,8 +35,9 @@ namespace PhongTro
 
                 if (reader.Read())
                 {
+                    string role = reader["DISPLAYNAME"].ToString();
                     labelError.Visible = false;
-                    fDashboard fDashboard = new fDashboard(txtUserName.Text );
+                    fDashboard fDashboard = new fDashboard(txtUserName.Text, role);
                     this.Hide();
                     fDashboard.Show();
                     //this.Show();
@@ -49,6 +50,11 @@ namespace PhongTro
         private void fLogin_Load(object sender, EventArgs e)
         {
             func.Connect(conn);
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

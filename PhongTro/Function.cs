@@ -107,5 +107,18 @@ namespace PhongTro
             dataGridView.Columns["CSN"].HeaderText = "CHỈ SỐ NƯỚC";
             dataGridView.ColumnHeadersDefaultCellStyle.Font = new Font("Times New Roman", 13, FontStyle.Bold);
         }
+        public void LoadAccount(DataGridView dataGridView, SqlConnection conn, string query)
+        {
+            SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+            DataTable dataTable = new DataTable();
+            adapter.Fill(dataTable);
+
+            dataGridView.DataSource = dataTable;
+            dataGridView.Columns["USERNAME"].HeaderText = "TÊN ĐĂNG NHẬP";
+            dataGridView.Columns["DISPLAYNAME"].HeaderText = "TÊN HIỂN THỊ";
+            dataGridView.Columns["PASSWORD"].HeaderText = "MẬT KHẨU";
+            dataGridView.Columns["ROLE"].HeaderText = "VAI TRÒ";
+            dataGridView.ColumnHeadersDefaultCellStyle.Font = new Font("Times New Roman", 13, FontStyle.Bold);
+        }
     }
 }

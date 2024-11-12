@@ -152,5 +152,14 @@ namespace PhongTro
         {
 
         }
+
+        private void btnPrintContract_Click(object sender, EventArgs e)
+        {
+            fPrintContract fPrintRoom = new fPrintContract();
+            Point pictureBoxLocation = groupBox1.PointToScreen(Point.Empty);
+            fPrintRoom.StartPosition = FormStartPosition.Manual;
+            fPrintRoom.Location = pictureBoxLocation;
+            fPrintRoom.Show();
+        }
     }
 }
