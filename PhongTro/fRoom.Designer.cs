@@ -287,6 +287,7 @@
             comboBoxLoadTypeRoom.Size = new Size(256, 31);
             comboBoxLoadTypeRoom.TabIndex = 5;
             comboBoxLoadTypeRoom.ValueMember = "MaLoai";
+            comboBoxLoadTypeRoom.SelectedIndexChanged += comboBoxLoadTypeRoom_SelectedIndexChanged;
             // 
             // label3
             // 

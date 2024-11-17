@@ -109,8 +109,8 @@ namespace PhongTro
                 int previousCSN = int.Parse(checkReader["CSN"].ToString());
 
 
-                int currentCSD = int.Parse(txtWaterOrderDetail.Text);
-                int currentCSN = int.Parse(txtElectOrderDetail.Text);
+                int currentCSD = int.Parse(txtElectOrderDetail.Text);
+                int currentCSN = int.Parse(txtWaterOrderDetail.Text);
 
 
                 if (currentCSD <= previousCSD || currentCSN <= previousCSN)
@@ -121,8 +121,6 @@ namespace PhongTro
             }
 
             checkReader.Close();
-
-
 
             SqlCommand cmd = new SqlCommand(sql, conn);
             cmd.ExecuteNonQuery();
@@ -149,65 +147,6 @@ namespace PhongTro
                 MessageBox.Show("Vui lòng chọn hợp đồng thuê.");
                 return;
             }
-
-            //string sql = @"
-            //    WITH LatestMonths AS (
-            //        SELECT 
-            //            MaHDT, 
-            //            NgayThang, 
-            //            CSD, 
-            //            CSN, 
-            //            ROW_NUMBER() OVER (PARTITION BY MaHDT ORDER BY NgayThang DESC) AS RowNum 
-            //        FROM CHI_TIET_HD
-            //    ),
-            //    PreviousMonth AS (
-            //        SELECT 
-            //            MaHDT,
-            //            CSD AS CSD_Truoc,
-            //            CSN AS CSN_Truoc,
-            //            NgayThang AS NgayThang_Truoc
-            //        FROM CHI_TIET_HD
-            //        WHERE 
-            //            (MONTH(NgayThang) = 12 AND YEAR(NgayThang) = YEAR((SELECT MAX(NgayThang) FROM CHI_TIET_HD)) - 1) 
-            //            OR (NgayThang = (SELECT MAX(NgayThang) FROM CHI_TIET_HD WHERE MaHDT = @MaHDT))
-            //    )
-            //    SELECT  
-            //        hdt.MaHDT, 
-            //        kh.TenKH AS KHÁCH,
-            //        phong.TenPhong AS PHÒNG,
-            //        CASE 
-            //            WHEN COALESCE(L1.CSD - COALESCE(L2.CSD, P.CSD_Truoc), L1.CSD) = 0 THEN L1.CSD * 3.5
-            //            ELSE (L1.CSD - COALESCE(L2.CSD, P.CSD_Truoc)) * 3.5
-            //        END AS ĐIỆN, 
-            //        CASE 
-            //            WHEN COALESCE(L1.CSN - COALESCE(L2.CSN, P.CSN_Truoc), L1.CSN) = 0 THEN L1.CSN * 15
-            //            ELSE (L1.CSN - COALESCE(L2.CSN, P.CSN_Truoc)) * 15
-            //        END AS NƯỚC, 
-            //        phong.Gia AS GIÁ,
-            //        phong.Gia + 
-            //            CASE 
-            //                WHEN COALESCE(L1.CSD - COALESCE(L2.CSD, P.CSD_Truoc), L1.CSD) = 0 THEN L1.CSD * 3.5
-            //                ELSE (L1.CSD - COALESCE(L2.CSD, P.CSD_Truoc)) * 3.5
-            //            END + 
-            //            CASE 
-            //                WHEN COALESCE(L1.CSN - COALESCE(L2.CSN, P.CSN_Truoc), L1.CSN) = 0 THEN L1.CSN * 15
-            //                ELSE (L1.CSN - COALESCE(L2.CSN, P.CSN_Truoc)) * 15
-            //            END AS TỔNG 
-            //    FROM 
-            //        HOP_DONG_THUE hdt
-            //    JOIN 
-            //        LatestMonths AS L1 ON hdt.MaHDT = L1.MaHDT AND L1.RowNum = 1
-            //    LEFT JOIN 
-            //        LatestMonths AS L2 ON hdt.MaHDT = L2.MaHDT AND L2.RowNum = 2
-            //    LEFT JOIN 
-            //        PreviousMonth AS P ON hdt.MaHDT = P.MaHDT
-            //    JOIN 
-            //        PHONG phong ON hdt.MaPhong = phong.MaPhong
-            //    JOIN 
-            //        KHACHHANG AS kh ON kh.MaKH = hdt.MaKH 
-            //    WHERE 
-            //        hdt.MaHDT = @MaHDT;";
-
 
             string sql = @"
     WITH SelectedMonth AS (
@@ -262,10 +201,6 @@ namespace PhongTro
     WHERE 
         hdt.MaHDT = @MaHDT;
 ";
-
-
-
-
 
             using (SqlCommand cmd = new SqlCommand(sql, conn))
             {
@@ -343,7 +278,7 @@ namespace PhongTro
 
         private void comboBoxContract_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+               
             string MaHDT = comboBoxContract.SelectedValue?.ToString();
             string sql = "SELECT * FROM CHI_TIET_HD WHERE MaHDT = '" + MaHDT + "' ORDER BY YEAR(NgayThang) DESC, MONTH(NgayThang) DESC";
             SqlCommand cmd = new SqlCommand(sql, conn);

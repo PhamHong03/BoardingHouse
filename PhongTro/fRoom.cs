@@ -161,6 +161,11 @@ namespace PhongTro
         {
 
         }
+
+        private void comboBoxLoadTypeRoom_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
+        }
     }
 
 }

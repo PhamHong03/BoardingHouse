@@ -107,6 +107,7 @@
             btnExportContract.TabIndex = 18;
             btnExportContract.Text = "Xuất file";
             btnExportContract.UseVisualStyleBackColor = false;
+            btnExportContract.Click += btnExportContract_Click;
             // 
             // btnResetContract
             // 

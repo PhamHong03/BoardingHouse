@@ -132,6 +132,7 @@
             btnReport.Text = "Báo cáo thống kê ";
             btnReport.TextAlign = ContentAlignment.MiddleRight;
             btnReport.UseVisualStyleBackColor = false;
+            btnReport.Click += btnReport_Click;
             // 
             // btnOrderDetail
             // 
