@@ -30,8 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fRoom));
             groupBox1 = new GroupBox();
-            button1 = new Button();
-            textBox3 = new TextBox();
+            btnSearchRoom = new Button();
+            txtSearchRoom = new TextBox();
             panel2 = new Panel();
             dataGridViewLoadRoom = new DataGridView();
             label6 = new Label();
@@ -61,8 +61,8 @@
             // groupBox1
             // 
             groupBox1.BackColor = Color.LavenderBlush;
-            groupBox1.Controls.Add(button1);
-            groupBox1.Controls.Add(textBox3);
+            groupBox1.Controls.Add(btnSearchRoom);
+            groupBox1.Controls.Add(txtSearchRoom);
             groupBox1.Controls.Add(panel2);
             groupBox1.Controls.Add(panel1);
             groupBox1.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 163);
@@ -73,32 +73,33 @@
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Thông tin phòng ";
-            groupBox1.Enter += groupBox1_Enter;
+//            groupBox1.Enter += groupBox1_Enter;
             // 
-            // button1
+            // btnSearchRoom
             // 
-            button1.BackColor = Color.AliceBlue;
-            button1.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold);
-            button1.Image = (Image)resources.GetObject("button1.Image");
-            button1.ImageAlign = ContentAlignment.MiddleLeft;
-            button1.Location = new Point(1012, 46);
-            button1.Name = "button1";
-            button1.Size = new Size(153, 56);
-            button1.TabIndex = 11;
-            button1.Text = "Tìm kiếm ";
-            button1.TextAlign = ContentAlignment.MiddleRight;
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
+            btnSearchRoom.BackColor = Color.AliceBlue;
+            btnSearchRoom.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold);
+            btnSearchRoom.Image = (Image)resources.GetObject("btnSearchRoom.Image");
+            btnSearchRoom.ImageAlign = ContentAlignment.MiddleLeft;
+            btnSearchRoom.Location = new Point(1006, 56);
+            btnSearchRoom.Name = "btnSearchRoom";
+            btnSearchRoom.Size = new Size(159, 44);
+            btnSearchRoom.TabIndex = 11;
+            btnSearchRoom.Text = "Tìm kiếm ";
+            btnSearchRoom.TextAlign = ContentAlignment.MiddleRight;
+            btnSearchRoom.UseVisualStyleBackColor = false;
+            btnSearchRoom.Click += button1_Click;
             // 
-            // textBox3
+            // txtSearchRoom
             // 
-            textBox3.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 163);
-            textBox3.Location = new Point(688, 46);
-            textBox3.Multiline = true;
-            textBox3.Name = "textBox3";
-            textBox3.PlaceholderText = "Nhập từ khóa tìm kiếm ";
-            textBox3.Size = new Size(318, 56);
-            textBox3.TabIndex = 10;
+            txtSearchRoom.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 163);
+            txtSearchRoom.Location = new Point(682, 56);
+            txtSearchRoom.Multiline = true;
+            txtSearchRoom.Name = "txtSearchRoom";
+            txtSearchRoom.PlaceholderText = "Nhập mã phòng ";
+            txtSearchRoom.Size = new Size(318, 44);
+            txtSearchRoom.TabIndex = 10;
+            txtSearchRoom.KeyDown += txtSearchRoom_KeyDown;
             // 
             // panel2
             // 
@@ -287,7 +288,7 @@
             comboBoxLoadTypeRoom.Size = new Size(256, 31);
             comboBoxLoadTypeRoom.TabIndex = 5;
             comboBoxLoadTypeRoom.ValueMember = "MaLoai";
-            comboBoxLoadTypeRoom.SelectedIndexChanged += comboBoxLoadTypeRoom_SelectedIndexChanged;
+            //comboBoxLoadTypeRoom.SelectedIndexChanged += comboBoxLoadTypeRoom_SelectedIndexChanged;
             // 
             // label3
             // 
@@ -372,8 +373,8 @@
         private Label label3;
         private ComboBox comboBoxLoadPriceRoom;
         private Label label5;
-        private Button button1;
-        private TextBox textBox3;
+        private Button btnSearchRoom;
+        private TextBox txtSearchRoom;
         private Button btnResetRoom;
         private Button btnSaveRoom;
         private Button btnDeleteRoom;

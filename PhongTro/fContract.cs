@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -189,7 +190,7 @@ namespace PhongTro
 
         private void exportExcel(DataGridView dataGridView, string filePath)
         {
-            
+
         }
 
 
@@ -211,5 +212,15 @@ namespace PhongTro
             }
         }
 
+        private void txtSearchContract_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                string tukhoa = txtSearchContract.Text;
+                string sql = "SELECT H.MaHDT, H.NGAY_THUE, H.THOI_HAN, H.NOI_DUNG, K.TenKH AS 'KH', P.TenPhong AS 'TEN PHONG' FROM HOP_DONG_THUE H JOIN KHACHHANG K ON H.MaKH = K.MaKH JOIN PHONG P ON H.MaPhong = P.MaPhong AND MaHDT LIKE '%" + tukhoa + "%'";
+
+                func.LoadContract(dataGridViewLoadContract, conn, sql);
+            }
+        }
     }
 }

@@ -7,6 +7,12 @@
     <Compile Update="fContract.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="fContractConHan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="fContractExpire.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="fCustomers.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -40,7 +46,16 @@
     <Compile Update="fReport.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="fReport2.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="fRoom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="fRoomEmpty.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="fRoomNotEmpty.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

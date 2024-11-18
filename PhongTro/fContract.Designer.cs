@@ -357,6 +357,7 @@
             txtSearchContract.PlaceholderText = "Nhập tìm kiếm ";
             txtSearchContract.Size = new Size(251, 49);
             txtSearchContract.TabIndex = 19;
+            txtSearchContract.KeyDown += txtSearchContract_KeyDown;
             // 
             // button8
             // 

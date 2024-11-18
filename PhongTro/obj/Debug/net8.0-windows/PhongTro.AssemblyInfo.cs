@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PhongTro")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c95c938fa5811c1dc4a361c4627a0e9c7cbff8e2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7d387124fa89e6efff2496406f6ef97df6c18613")]
 [assembly: System.Reflection.AssemblyProductAttribute("PhongTro")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PhongTro")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

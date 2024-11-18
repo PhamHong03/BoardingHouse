@@ -65,3 +65,8 @@ D:\HocPhanCT\CT291\PhongTro\PhongTro\obj\Debug\net8.0-windows\PhongTro.fPrintCon
 D:\HocPhanCT\CT291\PhongTro\PhongTro\obj\Debug\net8.0-windows\PhongTro.fPrintOrderDetail.resources
 D:\HocPhanCT\CT291\PhongTro\PhongTro\obj\Debug\net8.0-windows\PhongTro.fAccount.resources
 D:\HocPhanCT\CT291\PhongTro\PhongTro\obj\Debug\net8.0-windows\PhongTro.fPrintAccount.resources
+D:\HocPhanCT\CT291\PhongTro\PhongTro\obj\Debug\net8.0-windows\PhongTro.fReport2.resources
+D:\HocPhanCT\CT291\PhongTro\PhongTro\obj\Debug\net8.0-windows\PhongTro.fRoomEmpty.resources
+D:\HocPhanCT\CT291\PhongTro\PhongTro\obj\Debug\net8.0-windows\PhongTro.fRoomNotEmpty.resources
+D:\HocPhanCT\CT291\PhongTro\PhongTro\obj\Debug\net8.0-windows\PhongTro.fContractConHan.resources
+D:\HocPhanCT\CT291\PhongTro\PhongTro\obj\Debug\net8.0-windows\PhongTro.fContractExpire.resources

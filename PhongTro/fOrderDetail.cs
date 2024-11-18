@@ -30,7 +30,7 @@ namespace PhongTro
 
             func.LoadOrderDetail(dataGridViewLoadOrderDetail, conn, "SELECT * FROM CHI_TIET_HD");
 
-            func.LoadComBoBox("SELECT * FROM HOP_DONG_THUE", conn, comboBoxContract, comboBoxContract.DisplayMember, comboBoxContract.ValueMember);
+            func.LoadComBoBox(" SELECT * FROM  HOP_DONG_THUE WHERE THOI_HAN > GETDATE()", conn, comboBoxContract, comboBoxContract.DisplayMember, comboBoxContract.ValueMember);
         }
         private void btnAddOrderDetail_Click(object sender, EventArgs e)
         {
@@ -82,51 +82,73 @@ namespace PhongTro
             return 0;
         }
 
-        private void btnSaveOrderDetail_Click(object sender, EventArgs e)
-        {
-            string id = txtIdOrder.Text;
-            string id_hdt = comboBoxContract.SelectedValue.ToString();
-            string time = dateTimePickerDetailOrder.Value.ToString("yyyy-MM-dd");
-            string water = txtWaterOrderDetail.Text;
-            string electronic = txtElectOrderDetail.Text;
-            string sql = "INSERT INTO CHI_TIET_HD VALUES ('" + id + "', '" + id_hdt + "', '" + time + "', '" + electronic + "', '" + water + "')";
-
-            string MaHDT = comboBoxContract.SelectedValue.ToString();
-
-            string checkElectricityWater = @"
-                    SELECT CSD, CSN 
-                    FROM CHI_TIET_HD 
-                    WHERE NgayThang = (SELECT MAX(NgayThang) FROM CHI_TIET_HD WHERE MaHDT = @MaHDT)
-                    AND MaHDT = @MaHDT";
-            SqlCommand checkCmd = new SqlCommand(checkElectricityWater, conn);
-            checkCmd.Parameters.AddWithValue("@MaHDT", MaHDT);
-
-            SqlDataReader checkReader = checkCmd.ExecuteReader();
-
-            if (checkReader.Read())
+            private void btnSaveOrderDetail_Click(object sender, EventArgs e)
             {
-                int previousCSD = int.Parse(checkReader["CSD"].ToString());
-                int previousCSN = int.Parse(checkReader["CSN"].ToString());
+                string id = txtIdOrder.Text;
+                string id_hdt = comboBoxContract.SelectedValue.ToString();
+                string time = dateTimePickerDetailOrder.Value.ToString("yyyy-MM-dd");
+                string water = txtWaterOrderDetail.Text;
+                string electronic = txtElectOrderDetail.Text;
+                string sql = "INSERT INTO CHI_TIET_HD VALUES ('" + id + "', '" + id_hdt + "', '" + time + "', '" + electronic + "', '" + water + "')";
+
+                string MaHDT = comboBoxContract.SelectedValue.ToString();
+
+                string checkElectricityWater = @"
+                        SELECT CSD, CSN 
+                        FROM CHI_TIET_HD 
+                        WHERE NgayThang = (SELECT MAX(NgayThang) FROM CHI_TIET_HD WHERE MaHDT = @MaHDT)
+                        AND MaHDT = @MaHDT";
+            //string checkElectricityWater2 = @"
+            //       SELECT ct.CSD, ct.CSN, hdt.THOI_HAN
+            //           FROM CHI_TIET_HD ct
+            //           INNER JOIN HOP_DONG_THUE hdt ON ct.MaHDT = hdt.MaHDT
+            //           WHERE ct.NgayThang = (
+            //               SELECT MAX(NgayThang)
+            //               FROM CHI_TIET_HD
+            //               WHERE MaHDT = @MaHDT
+            //           )
+            //           AND ct.MaHDT = @MaHDT;";
 
 
-                int currentCSD = int.Parse(txtElectOrderDetail.Text);
-                int currentCSN = int.Parse(txtWaterOrderDetail.Text);
+            SqlCommand checkCmd = new SqlCommand(checkElectricityWater, conn);
+                checkCmd.Parameters.AddWithValue("@MaHDT", MaHDT);
 
+                SqlDataReader checkReader = checkCmd.ExecuteReader();
 
-                if (currentCSD <= previousCSD || currentCSN <= previousCSN)
+                if (checkReader.Read())
                 {
-                    MessageBox.Show("Chỉ số điện, nước tháng này phải lớn hơn chỉ số điện, nước tháng trước.");
-                    return;
+                    int previousCSD = int.Parse(checkReader["CSD"].ToString());
+                    int previousCSN = int.Parse(checkReader["CSN"].ToString());
+
+                    //DateTime thoihan = DateTime.Parse(checkReader["THOI_HAN"].ToString());
+
+                    //DateTime selectedDate = DateTime.Parse(time);
+                    int currentCSD = int.Parse(txtElectOrderDetail.Text);
+                    int currentCSN = int.Parse(txtWaterOrderDetail.Text);
+
+
+                    if ((currentCSD <= previousCSD || currentCSN <= previousCSN ))
+                    {
+                        MessageBox.Show("Chỉ số điện, nước tháng này phải lớn hơn chỉ số điện, nước tháng trước.");
+                        checkReader.Close();
+                        return;
+                    }
+                    
+                    //if (selectedDate > thoihan)
+                    //{
+                    //    MessageBox.Show("Ngày được chọn không được vượt quá thời hạn hợp đồng.");
+                    //    checkReader.Close();
+                    //    return;
+                    //}
                 }
+
+                checkReader.Close();
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Chi tiết hóa đơn đã thêm thành công!");
+                func.LoadOrderDetail(dataGridViewLoadOrderDetail, conn, "SELECT * FROM CHI_TIET_HD");
+
             }
-
-            checkReader.Close();
-
-            SqlCommand cmd = new SqlCommand(sql, conn);
-            cmd.ExecuteNonQuery();
-            MessageBox.Show("Chi tiết hóa đơn đã thêm thành công!");
-            func.LoadOrderDetail(dataGridViewLoadOrderDetail, conn, "SELECT * FROM CHI_TIET_HD");
-        }
 
         private void dataGridViewLoadOrderDetail_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -278,9 +300,11 @@ namespace PhongTro
 
         private void comboBoxContract_SelectedIndexChanged(object sender, EventArgs e)
         {
-               
+
             string MaHDT = comboBoxContract.SelectedValue?.ToString();
-            string sql = "SELECT * FROM CHI_TIET_HD WHERE MaHDT = '" + MaHDT + "' ORDER BY YEAR(NgayThang) DESC, MONTH(NgayThang) DESC";
+            string sql = "SELECT * FROM CHI_TIET_HD WHERE MaHDT = '" + MaHDT + "' ORDER BY YEAR(NgayThang) DESC, MONTH(NgayThang) DESC ";
+
+            //string sql = "SELECT * FROM CHI_TIET_HD ct, HOP_DONG_THUE hdt WHERE ct.MaHDT = hdt.MaHDT AND ct.MaHDT = 'HD004' AND hdt.THOI_HAN < GETDATE() ORDER BY YEAR(NgayThang) DESC, MONTH(NgayThang) DESC";
             SqlCommand cmd = new SqlCommand(sql, conn);
             cmd.ExecuteNonQuery();
             func.LoadOrderDetail(dataGridViewLoadOrderDetail, conn, sql);
@@ -293,6 +317,17 @@ namespace PhongTro
             fPrintRoom.StartPosition = FormStartPosition.Manual;
             fPrintRoom.Location = pictureBoxLocation;
             fPrintRoom.Show();
+        }
+
+        private void txtSearchOrderDetails_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                string tukhoa = txtSearchOrderDetails.Text;
+                string sql = "SELECT * FROM CHI_TIET_HD WHERE MaHDT LIKE '%" + tukhoa + "%' OR MaCTHD LIKE '%" + tukhoa + "%'";
+
+                func.LoadOrderDetail(dataGridViewLoadOrderDetail, conn, sql);
+            }
         }
     }
 }

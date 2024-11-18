@@ -79,7 +79,7 @@ namespace PhongTro
 
         private void btnReport_Click(object sender, EventArgs e)
         {
-            fReport roomForm = new fReport();
+            fReport2 roomForm = new fReport2();
             Point pictureBoxLocation = panelBig.PointToScreen(Point.Empty);
             roomForm.StartPosition = FormStartPosition.Manual;
             roomForm.Location = pictureBoxLocation;

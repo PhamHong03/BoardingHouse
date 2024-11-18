@@ -139,7 +139,7 @@ namespace PhongTro
             if (e.KeyCode == Keys.Enter)
             {
                 string tukhoa = txtSearchCustomer.Text;
-                string sql = "SELECT * FROM KHACHHANG WHERE TenKH LIKE '%" + tukhoa + "%'";
+                string sql = "SELECT * FROM KHACHHANG WHERE TenKH LIKE '%" + tukhoa + "%' OR SoDT LIKE '%" + tukhoa + "%' OR So_cccd LIKE '%" + tukhoa + "%'";
 
                 func.LoadDataGridView(dataGridViewLoadCustomer, conn, sql);
             }
@@ -152,6 +152,19 @@ namespace PhongTro
             fPrintRoom.StartPosition = FormStartPosition.Manual;
             fPrintRoom.Location = pictureBoxLocation;
             fPrintRoom.Show();
+        }
+
+        private void btnSearchCustomer_Click(object sender, EventArgs e)
+        {
+            string tukhoa = txtSearchCustomer.Text;
+            string sql = "SELECT * FROM KHACHHANG WHERE TenKH LIKE '%" + tukhoa + "%' OR SoDT LIKE '%" + tukhoa + "%' OR So_cccd LIKE '%" + tukhoa + "%'";
+
+            func.LoadDataGridView(dataGridViewLoadCustomer, conn, sql);
+        }
+
+        private void txtIdCustomer_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

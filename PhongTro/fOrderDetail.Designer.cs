@@ -53,8 +53,8 @@
             btnAddOrderDetail = new Button();
             label5 = new Label();
             label6 = new Label();
-            txtSearchContract = new TextBox();
-            button8 = new Button();
+            txtSearchOrderDetails = new TextBox();
+            btnSearchOrderDtail = new Button();
             groupBox1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewLoadOrderDetail).BeginInit();
@@ -65,8 +65,8 @@
             // 
             groupBox1.Controls.Add(panel2);
             groupBox1.Controls.Add(panel1);
-            groupBox1.Controls.Add(txtSearchContract);
-            groupBox1.Controls.Add(button8);
+            groupBox1.Controls.Add(txtSearchOrderDetails);
+            groupBox1.Controls.Add(btnSearchOrderDtail);
             groupBox1.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 163);
             groupBox1.ForeColor = Color.DarkBlue;
             groupBox1.Location = new Point(3, 6);
@@ -350,30 +350,31 @@
             label6.TabIndex = 32;
             label6.Text = "Chỉ số điện: ";
             // 
-            // txtSearchContract
+            // txtSearchOrderDetails
             // 
-            txtSearchContract.Font = new Font("Times New Roman", 12F);
-            txtSearchContract.Location = new Point(780, 30);
-            txtSearchContract.Multiline = true;
-            txtSearchContract.Name = "txtSearchContract";
-            txtSearchContract.PlaceholderText = "Nhập tìm kiếm ";
-            txtSearchContract.Size = new Size(251, 49);
-            txtSearchContract.TabIndex = 20;
+            txtSearchOrderDetails.Font = new Font("Times New Roman", 12F);
+            txtSearchOrderDetails.Location = new Point(780, 30);
+            txtSearchOrderDetails.Multiline = true;
+            txtSearchOrderDetails.Name = "txtSearchOrderDetails";
+            txtSearchOrderDetails.PlaceholderText = "Nhập tìm kiếm ";
+            txtSearchOrderDetails.Size = new Size(251, 49);
+            txtSearchOrderDetails.TabIndex = 20;
+            txtSearchOrderDetails.KeyDown += txtSearchOrderDetails_KeyDown;
             // 
-            // button8
+            // btnSearchOrderDtail
             // 
-            button8.BackColor = Color.AliceBlue;
-            button8.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 163);
-            button8.ForeColor = Color.MidnightBlue;
-            button8.Image = (Image)resources.GetObject("button8.Image");
-            button8.ImageAlign = ContentAlignment.MiddleLeft;
-            button8.Location = new Point(1039, 30);
-            button8.Name = "button8";
-            button8.Size = new Size(124, 49);
-            button8.TabIndex = 21;
-            button8.Text = "Tìm kiếm ";
-            button8.TextAlign = ContentAlignment.MiddleRight;
-            button8.UseVisualStyleBackColor = false;
+            btnSearchOrderDtail.BackColor = Color.AliceBlue;
+            btnSearchOrderDtail.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 163);
+            btnSearchOrderDtail.ForeColor = Color.MidnightBlue;
+            btnSearchOrderDtail.Image = (Image)resources.GetObject("btnSearchOrderDtail.Image");
+            btnSearchOrderDtail.ImageAlign = ContentAlignment.MiddleLeft;
+            btnSearchOrderDtail.Location = new Point(1039, 30);
+            btnSearchOrderDtail.Name = "btnSearchOrderDtail";
+            btnSearchOrderDtail.Size = new Size(124, 49);
+            btnSearchOrderDtail.TabIndex = 21;
+            btnSearchOrderDtail.Text = "Tìm kiếm ";
+            btnSearchOrderDtail.TextAlign = ContentAlignment.MiddleRight;
+            btnSearchOrderDtail.UseVisualStyleBackColor = false;
             // 
             // fOrderDetail
             // 
@@ -400,8 +401,8 @@
         private GroupBox groupBox1;
         private DataGridView dataGridViewLoadOrderDetail;
         private Panel panel1;
-        private TextBox txtSearchContract;
-        private Button button8;
+        private TextBox txtSearchOrderDetails;
+        private Button btnSearchOrderDtail;
         private TextBox txtIdOrder;
         private Button btnExportOrderDetail;
         private Label label1;

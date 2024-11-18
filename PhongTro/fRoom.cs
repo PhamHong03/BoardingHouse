@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -154,17 +155,23 @@ namespace PhongTro
 
         private void button1_Click(object sender, EventArgs e)
         {
+            string tukhoa = txtSearchRoom.Text;
 
+            string sql2 = "SELECT P.MaPhong, P.TenPhong, P.Gia, P.TrangThai, LP.TenLoai AS 'TENLOAI' FROM PHONG P JOIN LOAIPHONG LP ON P.MaLoai = LP.MaLoai WHERE MaPhong LIKE '%" + tukhoa + "%'";
+
+            func.LoadRoom(dataGridViewLoadRoom, conn, sql2);
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
+        private void txtSearchRoom_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.KeyCode == Keys.Enter)
+            {
+                string tukhoa = txtSearchRoom.Text;
 
-        }
+                string sql2 = "SELECT P.MaPhong, P.TenPhong, P.Gia, P.TrangThai, LP.TenLoai AS 'TENLOAI' FROM PHONG P JOIN LOAIPHONG LP ON P.MaLoai = LP.MaLoai WHERE MaPhong LIKE '%"+tukhoa+"%'";
 
-        private void comboBoxLoadTypeRoom_SelectedIndexChanged(object sender, EventArgs e)
-        {
-           
+                func.LoadRoom(dataGridViewLoadRoom, conn, sql2);
+            }
         }
     }
 

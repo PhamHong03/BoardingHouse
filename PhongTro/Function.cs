@@ -76,6 +76,7 @@ namespace PhongTro
             dataGridView.ColumnHeadersDefaultCellStyle.Font = new Font("Times New Roman", 13, FontStyle.Bold);
         }
 
+
         public void LoadCustomer(DataGridView dataGridView, SqlConnection conn, string query)
         {
             SqlDataAdapter adapter = new SqlDataAdapter(query, conn);

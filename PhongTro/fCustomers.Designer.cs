@@ -99,6 +99,7 @@
             btnSearchCustomer.Text = "Tìm kiếm ";
             btnSearchCustomer.TextAlign = ContentAlignment.MiddleRight;
             btnSearchCustomer.UseVisualStyleBackColor = false;
+            btnSearchCustomer.Click += btnSearchCustomer_Click;
             // 
             // panel2
             // 
@@ -290,8 +291,10 @@
             txtIdCustomer.ForeColor = Color.MidnightBlue;
             txtIdCustomer.Location = new Point(169, 28);
             txtIdCustomer.Name = "txtIdCustomer";
+            txtIdCustomer.ReadOnly = true;
             txtIdCustomer.Size = new Size(221, 30);
             txtIdCustomer.TabIndex = 6;
+            txtIdCustomer.TextChanged += txtIdCustomer_TextChanged;
             // 
             // label7
             // 
