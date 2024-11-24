@@ -81,7 +81,7 @@ namespace PhongTro
             SqlCommand cmd = new SqlCommand(sql, conn);
 
             cmd.ExecuteNonQuery();
-            MessageBox.Show("Thêm phòng thành công");
+            MessageBox.Show("Thêm phòng thành công", "Thông báo", MessageBoxButtons.OKCancel);
             string query = "SELECT P.MaPhong, P.TenPhong, P.Gia, P.TrangThai, LP.TenLoai AS 'TENLOAI' FROM PHONG P JOIN LOAIPHONG LP ON P.MaLoai = LP.MaLoai";
             //func.LoadDataGridView(dataGridViewLoadRoom, conn, "SELECT * FROM PHONG");
 
@@ -101,7 +101,7 @@ namespace PhongTro
 
             SqlCommand command = new SqlCommand(sql, conn);
             command.ExecuteNonQuery();
-            MessageBox.Show("Cập nhật phòng thành công");
+            MessageBox.Show("Cập nhật phòng thành công", "Thông báo", MessageBoxButtons.OKCancel);
             string query = "SELECT P.MaPhong, P.TenPhong, P.Gia, P.TrangThai, LP.TenLoai AS 'TENLOAI' FROM PHONG P JOIN LOAIPHONG LP ON P.MaLoai = LP.MaLoai";
             //func.LoadDataGridView(dataGridViewLoadRoom, conn, "SELECT * FROM PHONG");
 
@@ -136,7 +136,7 @@ namespace PhongTro
             string sql = "DELETE FROM PHONG WHERE MaPhong = '" + id + "'";
             SqlCommand command = new SqlCommand(sql, conn);
             command.ExecuteNonQuery();
-            MessageBox.Show("Xóa phòng thành công");
+            MessageBox.Show("Xóa phòng thành công", "Thông báo", MessageBoxButtons.OKCancel);
             string query = "SELECT P.MaPhong, P.TenPhong, P.Gia, P.TrangThai, LP.TenLoai AS 'TENLOAI' FROM PHONG P JOIN LOAIPHONG LP ON P.MaLoai = LP.MaLoai";
             //func.LoadDataGridView(dataGridViewLoadRoom, conn, "SELECT * FROM PHONG");
 

@@ -28,7 +28,11 @@ namespace PhongTro
             func.Connect(conn);
             func.LoadComBoBox("SELECT * FROM KHACHHANG", conn, comboBoxLoadCustomer, comboBoxLoadCustomer.DisplayMember, comboBoxLoadCustomer.ValueMember);
             func.LoadComBoBox("SELECT * FROM PHONG", conn, comboBoxLoadRoom, comboBoxLoadRoom.DisplayMember, comboBoxLoadRoom.ValueMember);
+            comboBoxLoadRoom.MaxDropDownItems = 15;
+            comboBoxLoadRoom.IntegralHeight = false;
 
+            comboBoxLoadCustomer.MaxDropDownItems = 15;
+            comboBoxLoadCustomer.IntegralHeight = false;
             string query = "SELECT H.MaHDT, H.NGAY_THUE, H.THOI_HAN, H.NOI_DUNG, K.TenKH AS 'KH', P.TenPhong AS 'TEN PHONG' FROM HOP_DONG_THUE H JOIN KHACHHANG K ON H.MaKH = K.MaKH JOIN PHONG P ON H.MaPhong = P.MaPhong";
             func.LoadContract(dataGridViewLoadContract, conn, query);
         }
@@ -101,7 +105,7 @@ namespace PhongTro
 
             SqlCommand sqlCommand = new SqlCommand(sql, conn);
             sqlCommand.ExecuteNonQuery();
-            MessageBox.Show("Tạo hợp đồng thành công!");
+            MessageBox.Show("Tạo hợp đồng thành công!", "Thông báo", MessageBoxButtons.OKCancel);
             string query = "SELECT H.MaHDT, H.NGAY_THUE, H.THOI_HAN, H.NOI_DUNG, K.TenKH AS 'KH', P.TenPhong AS 'TEN PHONG' FROM HOP_DONG_THUE H JOIN KHACHHANG K ON H.MaKH = K.MaKH JOIN PHONG P ON H.MaPhong = P.MaPhong";
             func.LoadContract(dataGridViewLoadContract, conn, query);
         }
@@ -123,7 +127,7 @@ namespace PhongTro
             string sql = "DELETE FROM HOP_DONG_THUE WHERE MaHDT = '" + id + "'";
             SqlCommand sqlCommand = new SqlCommand(sql, conn);
             sqlCommand.ExecuteNonQuery();
-            MessageBox.Show("Xóa hợp đồng thành công!");
+            MessageBox.Show("Xóa hợp đồng thành công!", "Thông báo", MessageBoxButtons.OKCancel);
             string query = "SELECT H.MaHDT, H.NGAY_THUE, H.THOI_HAN, H.NOI_DUNG, K.TenKH AS 'KH', P.TenPhong AS 'TEN PHONG' FROM HOP_DONG_THUE H JOIN KHACHHANG K ON H.MaKH = K.MaKH JOIN PHONG P ON H.MaPhong = P.MaPhong";
             func.LoadContract(dataGridViewLoadContract, conn, query);
 
@@ -139,7 +143,7 @@ namespace PhongTro
             string sql = "UPDATE HOP_DONG_THUE SET NGAY_THUE = '" + ngay + "', THOI_HAN = '" + expire + "', NOI_DUNG = '" + content + "' WHERE MaHDT = '" + id + "' ";
             SqlCommand sqlCommand = new SqlCommand(sql, conn);
             sqlCommand.ExecuteNonQuery();
-            MessageBox.Show("Cập nhật hợp đồng thành công!");
+            MessageBox.Show("Cập nhật hợp đồng thành công!", "Thông báo", MessageBoxButtons.OKCancel);
             string query = "SELECT H.MaHDT, H.NGAY_THUE, H.THOI_HAN, H.NOI_DUNG, K.TenKH AS 'KH', P.TenPhong AS 'TEN PHONG' FROM HOP_DONG_THUE H JOIN KHACHHANG K ON H.MaKH = K.MaKH JOIN PHONG P ON H.MaPhong = P.MaPhong";
             func.LoadContract(dataGridViewLoadContract, conn, query);
         }

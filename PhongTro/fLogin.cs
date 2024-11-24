@@ -19,7 +19,7 @@ namespace PhongTro
 
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
-                MessageBox.Show("Tên đăng nhập hoặc mật khẩu không được trống");
+                MessageBox.Show("Tên đăng nhập hoặc mật khẩu không được trống", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
             }
             //else if (username != "select USERNAME from ACCOUNT where USERNAME = '"+username+"'" || password != "select PASSWORD from ACCOUNT where PASSWORD = '" + password + "'")
             //{

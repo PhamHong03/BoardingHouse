@@ -51,9 +51,9 @@
             label1.ForeColor = Color.DarkBlue;
             label1.Location = new Point(340, 25);
             label1.Name = "label1";
-            label1.Size = new Size(509, 35);
+            label1.Size = new Size(438, 35);
             label1.TabIndex = 2;
-            label1.Text = "DANH SÁCH PHÒNG ĐANG THUÊ ";
+            label1.Text = "DANH SÁCH PHÒNG TRỐNG ";
             // 
             // fRoomEmpty
             // 

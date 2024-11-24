@@ -78,7 +78,7 @@ namespace PhongTro
 
             SqlCommand cmd = new SqlCommand(sql, conn);
             cmd.ExecuteNonQuery();
-            MessageBox.Show("Thêm khách hàng thành công");
+            MessageBox.Show("Thêm khách hàng thành công", "Thông báo", MessageBoxButtons.OKCancel);
             func.LoadDataGridView(dataGridViewLoadCustomer, conn, "SELECT * FROM KHACHHANG");
         }
 
@@ -96,7 +96,7 @@ namespace PhongTro
 
             SqlCommand cmd = new SqlCommand(sql, conn);
             cmd.ExecuteNonQuery();
-            MessageBox.Show("Cập nhật khách hàng thành công");
+            MessageBox.Show("Cập nhật khách hàng thành công", "Thông báo", MessageBoxButtons.OKCancel);
             func.LoadDataGridView(dataGridViewLoadCustomer, conn, "SELECT * FROM KHACHHANG");
         }
 
@@ -110,7 +110,7 @@ namespace PhongTro
 
             sqlCommand.ExecuteNonQuery();
 
-            MessageBox.Show("Xóa khách hàng thành công");
+            MessageBox.Show("Xóa khách hàng thành công", "Thông báo", MessageBoxButtons.OKCancel);
             func.LoadDataGridView(dataGridViewLoadCustomer, conn, "SELECT * FROM KHACHHANG");
         }
 

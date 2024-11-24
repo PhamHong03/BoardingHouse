@@ -50,7 +50,7 @@ namespace PhongTro
 
             SqlCommand command = new SqlCommand(sql, conn);
             command.ExecuteNonQuery();
-            MessageBox.Show("Thêm tài khoản thành công");
+            MessageBox.Show("Thêm tài khoản thành công", "Thông báo", MessageBoxButtons.OKCancel);
 
             func.LoadAccount(dataGridViewLoadlistAccount, conn, "SELECT * FROM ACCOUNT");
         }
@@ -68,7 +68,7 @@ namespace PhongTro
 
             SqlCommand command = new SqlCommand(sql, conn);
             command.ExecuteNonQuery();
-            MessageBox.Show("Xóa tài khoản thành công");
+            MessageBox.Show("Xóa tài khoản thành công", "Thông báo", MessageBoxButtons.OKCancel);
 
             func.LoadAccount(dataGridViewLoadlistAccount, conn, "SELECT * FROM ACCOUNT");
         }
@@ -93,7 +93,7 @@ namespace PhongTro
 
             SqlCommand command = new SqlCommand(sql, conn);
             command.ExecuteNonQuery();
-            MessageBox.Show("Sửa tài khoản thành công");
+            MessageBox.Show("Sửa tài khoản thành công", "Thông báo", MessageBoxButtons.OKCancel);
 
             func.LoadAccount(dataGridViewLoadlistAccount, conn, "SELECT * FROM ACCOUNT");
 

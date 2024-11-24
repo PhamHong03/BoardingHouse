@@ -29,6 +29,8 @@ namespace PhongTro
             func.Connect(conn);
 
             func.LoadOrderDetail(dataGridViewLoadOrderDetail, conn, "SELECT * FROM CHI_TIET_HD");
+            comboBoxContract.MaxDropDownItems = 15;
+            comboBoxContract.IntegralHeight = false;
 
             func.LoadComBoBox(" SELECT * FROM  HOP_DONG_THUE WHERE THOI_HAN > GETDATE()", conn, comboBoxContract, comboBoxContract.DisplayMember, comboBoxContract.ValueMember);
         }
@@ -129,7 +131,7 @@ namespace PhongTro
 
                     if ((currentCSD <= previousCSD || currentCSN <= previousCSN ))
                     {
-                        MessageBox.Show("Chỉ số điện, nước tháng này phải lớn hơn chỉ số điện, nước tháng trước.");
+                        MessageBox.Show("Chỉ số điện, nước tháng này phải lớn hơn chỉ số điện, nước tháng trước.", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
                         checkReader.Close();
                         return;
                     }
@@ -145,7 +147,7 @@ namespace PhongTro
                 checkReader.Close();
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
-                MessageBox.Show("Chi tiết hóa đơn đã thêm thành công!");
+                MessageBox.Show("Chi tiết hóa đơn đã thêm thành công!", "Thông báo", MessageBoxButtons.OKCancel);
                 func.LoadOrderDetail(dataGridViewLoadOrderDetail, conn, "SELECT * FROM CHI_TIET_HD");
 
             }
@@ -276,7 +278,7 @@ namespace PhongTro
 
             SqlCommand cmd = new SqlCommand(sql, conn);
             cmd.ExecuteNonQuery();
-            MessageBox.Show("Xoá thành công");
+            MessageBox.Show("Xoá thành công", "Thông báo", MessageBoxButtons.OKCancel);
             func.LoadOrderDetail(dataGridViewLoadOrderDetail, conn, "SELECT * FROM CHI_TIET_HD");
         }
 
@@ -294,7 +296,7 @@ namespace PhongTro
 
             SqlCommand cmd = new SqlCommand(sql, conn);
             cmd.ExecuteNonQuery();
-            MessageBox.Show("Chi tiết hóa đơn đã được cập nhật thành công!");
+            MessageBox.Show("Chi tiết hóa đơn đã được cập nhật thành công!", "Thông báo", MessageBoxButtons.OKCancel);
             func.LoadOrderDetail(dataGridViewLoadOrderDetail, conn, "SELECT * FROM CHI_TIET_HD");
         }
 
