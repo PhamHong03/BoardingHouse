@@ -32,7 +32,7 @@
             groupBox = new GroupBox();
             button1 = new Button();
             dataGridViewLoadlistAccount = new DataGridView();
-            textBox4 = new TextBox();
+            txtSearchAccount = new TextBox();
             panel1 = new Panel();
             comboBox1 = new ComboBox();
             label4 = new Label();
@@ -57,7 +57,7 @@
             groupBox.BackColor = Color.White;
             groupBox.Controls.Add(button1);
             groupBox.Controls.Add(dataGridViewLoadlistAccount);
-            groupBox.Controls.Add(textBox4);
+            groupBox.Controls.Add(txtSearchAccount);
             groupBox.Controls.Add(panel1);
             groupBox.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 163);
             groupBox.ForeColor = Color.DarkBlue;
@@ -94,15 +94,16 @@
             dataGridViewLoadlistAccount.TabIndex = 0;
             dataGridViewLoadlistAccount.CellClick += dataGridViewLoadlistAccount_CellClick;
             // 
-            // textBox4
+            // txtSearchAccount
             // 
-            textBox4.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 163);
-            textBox4.Location = new Point(681, 50);
-            textBox4.Multiline = true;
-            textBox4.Name = "textBox4";
-            textBox4.PlaceholderText = "Nhập từ khóa tìm kiếm ";
-            textBox4.Size = new Size(318, 56);
-            textBox4.TabIndex = 12;
+            txtSearchAccount.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 163);
+            txtSearchAccount.Location = new Point(681, 50);
+            txtSearchAccount.Multiline = true;
+            txtSearchAccount.Name = "txtSearchAccount";
+            txtSearchAccount.PlaceholderText = "Nhập từ khóa tìm kiếm ";
+            txtSearchAccount.Size = new Size(318, 56);
+            txtSearchAccount.TabIndex = 12;
+            txtSearchAccount.KeyDown += textBox4_KeyDown;
             // 
             // panel1
             // 
@@ -296,7 +297,7 @@
         private DataGridView dataGridViewLoadlistAccount;
         private Panel panel1;
         private Button button1;
-        private TextBox textBox4;
+        private TextBox txtSearchAccount;
         private Button btnDeleteAccount;
         private Button btnPrintAccount;
         private Button btnResetAccount;

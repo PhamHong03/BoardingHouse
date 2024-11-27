@@ -41,7 +41,6 @@
             btnEditCustomer = new Button();
             btnDeleteCustomer = new Button();
             btnResetCustomer = new Button();
-            btnExport = new Button();
             btnPrint = new Button();
             comboBoxLoadGender = new ComboBox();
             txtCccdCustomer = new TextBox();
@@ -94,7 +93,7 @@
             btnSearchCustomer.ImageAlign = ContentAlignment.MiddleLeft;
             btnSearchCustomer.Location = new Point(981, 29);
             btnSearchCustomer.Name = "btnSearchCustomer";
-            btnSearchCustomer.Size = new Size(129, 44);
+            btnSearchCustomer.Size = new Size(146, 44);
             btnSearchCustomer.TabIndex = 18;
             btnSearchCustomer.Text = "Tìm kiếm ";
             btnSearchCustomer.TextAlign = ContentAlignment.MiddleRight;
@@ -143,7 +142,6 @@
             panel1.Controls.Add(btnEditCustomer);
             panel1.Controls.Add(btnDeleteCustomer);
             panel1.Controls.Add(btnResetCustomer);
-            panel1.Controls.Add(btnExport);
             panel1.Controls.Add(btnPrint);
             panel1.Controls.Add(comboBoxLoadGender);
             panel1.Controls.Add(txtCccdCustomer);
@@ -217,16 +215,6 @@
             btnResetCustomer.UseVisualStyleBackColor = false;
             btnResetCustomer.Click += btnResetCustomer_Click;
             // 
-            // btnExport
-            // 
-            btnExport.BackColor = Color.LavenderBlush;
-            btnExport.Location = new Point(128, 162);
-            btnExport.Name = "btnExport";
-            btnExport.Size = new Size(110, 44);
-            btnExport.TabIndex = 13;
-            btnExport.Text = "Xuất file";
-            btnExport.UseVisualStyleBackColor = false;
-            // 
             // btnPrint
             // 
             btnPrint.BackColor = Color.LavenderBlush;
@@ -257,6 +245,8 @@
             txtCccdCustomer.Name = "txtCccdCustomer";
             txtCccdCustomer.Size = new Size(221, 30);
             txtCccdCustomer.TabIndex = 10;
+            txtCccdCustomer.KeyPress += txtCccdCustomer_KeyPress;
+            txtCccdCustomer.Leave += txtCccdCustomer_Leave;
             // 
             // txtAddressCustomer
             // 
@@ -284,6 +274,9 @@
             txtPhoneCustomer.Name = "txtPhoneCustomer";
             txtPhoneCustomer.Size = new Size(221, 30);
             txtPhoneCustomer.TabIndex = 7;
+            txtPhoneCustomer.TextChanged += txtPhoneCustomer_TextChanged;
+            txtPhoneCustomer.KeyPress += txtPhoneCustomer_KeyPress;
+            txtPhoneCustomer.Leave += txtPhoneCustomer_Leave;
             // 
             // txtIdCustomer
             // 
@@ -393,7 +386,6 @@
         private Button btnEditCustomer;
         private Button btnDeleteCustomer;
         private Button btnResetCustomer;
-        private Button btnExport;
         private Button btnPrint;
         private ComboBox comboBoxLoadGender;
         private TextBox txtCccdCustomer;

@@ -84,18 +84,18 @@ namespace PhongTro
             return 0;
         }
 
-            private void btnSaveOrderDetail_Click(object sender, EventArgs e)
-            {
-                string id = txtIdOrder.Text;
-                string id_hdt = comboBoxContract.SelectedValue.ToString();
-                string time = dateTimePickerDetailOrder.Value.ToString("yyyy-MM-dd");
-                string water = txtWaterOrderDetail.Text;
-                string electronic = txtElectOrderDetail.Text;
-                string sql = "INSERT INTO CHI_TIET_HD VALUES ('" + id + "', '" + id_hdt + "', '" + time + "', '" + electronic + "', '" + water + "')";
+        private void btnSaveOrderDetail_Click(object sender, EventArgs e)
+        {
+            string id = txtIdOrder.Text;
+            string id_hdt = comboBoxContract.SelectedValue.ToString();
+            string time = dateTimePickerDetailOrder.Value.ToString("yyyy-MM-dd");
+            string water = txtWaterOrderDetail.Text;
+            string electronic = txtElectOrderDetail.Text;
+            string sql = "INSERT INTO CHI_TIET_HD VALUES ('" + id + "', '" + id_hdt + "', '" + time + "', '" + electronic + "', '" + water + "')";
 
-                string MaHDT = comboBoxContract.SelectedValue.ToString();
+            string MaHDT = comboBoxContract.SelectedValue.ToString();
 
-                string checkElectricityWater = @"
+            string checkElectricityWater = @"
                         SELECT CSD, CSN 
                         FROM CHI_TIET_HD 
                         WHERE NgayThang = (SELECT MAX(NgayThang) FROM CHI_TIET_HD WHERE MaHDT = @MaHDT)
@@ -113,44 +113,44 @@ namespace PhongTro
 
 
             SqlCommand checkCmd = new SqlCommand(checkElectricityWater, conn);
-                checkCmd.Parameters.AddWithValue("@MaHDT", MaHDT);
+            checkCmd.Parameters.AddWithValue("@MaHDT", MaHDT);
 
-                SqlDataReader checkReader = checkCmd.ExecuteReader();
+            SqlDataReader checkReader = checkCmd.ExecuteReader();
 
-                if (checkReader.Read())
+            if (checkReader.Read())
+            {
+                int previousCSD = int.Parse(checkReader["CSD"].ToString());
+                int previousCSN = int.Parse(checkReader["CSN"].ToString());
+
+                //DateTime thoihan = DateTime.Parse(checkReader["THOI_HAN"].ToString());
+
+                //DateTime selectedDate = DateTime.Parse(time);
+                int currentCSD = int.Parse(txtElectOrderDetail.Text);
+                int currentCSN = int.Parse(txtWaterOrderDetail.Text);
+
+
+                if ((currentCSD <= previousCSD || currentCSN <= previousCSN))
                 {
-                    int previousCSD = int.Parse(checkReader["CSD"].ToString());
-                    int previousCSN = int.Parse(checkReader["CSN"].ToString());
-
-                    //DateTime thoihan = DateTime.Parse(checkReader["THOI_HAN"].ToString());
-
-                    //DateTime selectedDate = DateTime.Parse(time);
-                    int currentCSD = int.Parse(txtElectOrderDetail.Text);
-                    int currentCSN = int.Parse(txtWaterOrderDetail.Text);
-
-
-                    if ((currentCSD <= previousCSD || currentCSN <= previousCSN ))
-                    {
-                        MessageBox.Show("Chỉ số điện, nước tháng này phải lớn hơn chỉ số điện, nước tháng trước.", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-                        checkReader.Close();
-                        return;
-                    }
-                    
-                    //if (selectedDate > thoihan)
-                    //{
-                    //    MessageBox.Show("Ngày được chọn không được vượt quá thời hạn hợp đồng.");
-                    //    checkReader.Close();
-                    //    return;
-                    //}
+                    MessageBox.Show("Chỉ số điện, nước tháng này phải lớn hơn chỉ số điện, nước tháng trước.", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                    checkReader.Close();
+                    return;
                 }
 
-                checkReader.Close();
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Chi tiết hóa đơn đã thêm thành công!", "Thông báo", MessageBoxButtons.OKCancel);
-                func.LoadOrderDetail(dataGridViewLoadOrderDetail, conn, "SELECT * FROM CHI_TIET_HD");
-
+                //if (selectedDate > thoihan)
+                //{
+                //    MessageBox.Show("Ngày được chọn không được vượt quá thời hạn hợp đồng.");
+                //    checkReader.Close();
+                //    return;
+                //}
             }
+
+            checkReader.Close();
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            cmd.ExecuteNonQuery();
+            MessageBox.Show("Chi tiết hóa đơn đã thêm thành công!", "Thông báo", MessageBoxButtons.OKCancel);
+            func.LoadOrderDetail(dataGridViewLoadOrderDetail, conn, "SELECT * FROM CHI_TIET_HD");
+
+        }
 
         private void dataGridViewLoadOrderDetail_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -331,5 +331,24 @@ namespace PhongTro
                 func.LoadOrderDetail(dataGridViewLoadOrderDetail, conn, sql);
             }
         }
+
+        private void txtWaterOrderDetail_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) & !Char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+
+        }
+
+        private void txtElectOrderDetail_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) & !Char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+
+        }
+
     }
 }

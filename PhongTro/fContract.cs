@@ -28,6 +28,7 @@ namespace PhongTro
             func.Connect(conn);
             func.LoadComBoBox("SELECT * FROM KHACHHANG", conn, comboBoxLoadCustomer, comboBoxLoadCustomer.DisplayMember, comboBoxLoadCustomer.ValueMember);
             func.LoadComBoBox("SELECT * FROM PHONG", conn, comboBoxLoadRoom, comboBoxLoadRoom.DisplayMember, comboBoxLoadRoom.ValueMember);
+            //func.LoadComBoBox("SELECT * FROM PHONG WHERE TRANGTHAI = N'Trống'", conn, comboBoxLoadRoom, comboBoxLoadRoom.DisplayMember, comboBoxLoadRoom.ValueMember);
             comboBoxLoadRoom.MaxDropDownItems = 15;
             comboBoxLoadRoom.IntegralHeight = false;
 
@@ -102,9 +103,11 @@ namespace PhongTro
             }
 
             string sql = "INSERT INTO HOP_DONG_THUE VALUES ('" + id + "','" + ngay + "', N'" + expire + "', N'" + content + "', '" + makh + "' , '" + mp + "')";
-
+            string sql2 = "UPDATE PHONG SET TRANGTHAI = N'Đang ở' WHERE MaPhong = '"+mp+"'";
             SqlCommand sqlCommand = new SqlCommand(sql, conn);
+            SqlCommand sqlCommand1 = new SqlCommand(sql2, conn);    
             sqlCommand.ExecuteNonQuery();
+            sqlCommand1.ExecuteNonQuery();
             MessageBox.Show("Tạo hợp đồng thành công!", "Thông báo", MessageBoxButtons.OKCancel);
             string query = "SELECT H.MaHDT, H.NGAY_THUE, H.THOI_HAN, H.NOI_DUNG, K.TenKH AS 'KH', P.TenPhong AS 'TEN PHONG' FROM HOP_DONG_THUE H JOIN KHACHHANG K ON H.MaKH = K.MaKH JOIN PHONG P ON H.MaPhong = P.MaPhong";
             func.LoadContract(dataGridViewLoadContract, conn, query);
@@ -122,11 +125,16 @@ namespace PhongTro
 
         private void btnDeleteContract_Click(object sender, EventArgs e)
         {
+            string mp = comboBoxLoadRoom.SelectedValue.ToString();
+
             string id = txtIdContract.Text;
 
             string sql = "DELETE FROM HOP_DONG_THUE WHERE MaHDT = '" + id + "'";
+            string sql2 = "UPDATE PHONG SET TRANGTHAI = N'Trống' WHERE MaPhong = '" + mp + "'";
             SqlCommand sqlCommand = new SqlCommand(sql, conn);
             sqlCommand.ExecuteNonQuery();
+            SqlCommand sqlCommand1 = new SqlCommand(sql2, conn);
+            sqlCommand1.ExecuteNonQuery();
             MessageBox.Show("Xóa hợp đồng thành công!", "Thông báo", MessageBoxButtons.OKCancel);
             string query = "SELECT H.MaHDT, H.NGAY_THUE, H.THOI_HAN, H.NOI_DUNG, K.TenKH AS 'KH', P.TenPhong AS 'TEN PHONG' FROM HOP_DONG_THUE H JOIN KHACHHANG K ON H.MaKH = K.MaKH JOIN PHONG P ON H.MaPhong = P.MaPhong";
             func.LoadContract(dataGridViewLoadContract, conn, query);
@@ -168,53 +176,76 @@ namespace PhongTro
             fPrintRoom.Show();
         }
 
-        private void btnExportContract_Click(object sender, EventArgs e)
-        {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Excel File (*.xlsx)|*.xlsx";
-            saveFileDialog.Title = "Save Excel File";
-            saveFileDialog.FileName = "DanhSachHopDongThue";
+        //private void btnExportContract_Click(object sender, EventArgs e)
+        //{
+        //    SaveFileDialog saveFileDialog = new SaveFileDialog();
+        //    saveFileDialog.Filter = "Excel File (*.xlsx)|*.xlsx";
+        //    saveFileDialog.Title = "Save Excel File";
+        //    saveFileDialog.FileName = "DanhSachHopDongThue";
 
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                string filePath = saveFileDialog.FileName;
+        //    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+        //    {
+        //        string filePath = saveFileDialog.FileName;
 
-                try
-                {
-                    exportExcel(dataGridViewLoadContract, filePath);
-                    MessageBox.Show("Xuất Excel thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Lỗi khi xuất Excel: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
+        //        try
+        //        {
+        //            exportExcel(dataGridViewLoadContract, filePath);
+        //            MessageBox.Show("Xuất Excel thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            MessageBox.Show("Lỗi khi xuất Excel: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        }
+        //    }
 
-        }
+        //}
 
         private void exportExcel(DataGridView dataGridView, string filePath)
         {
+            //Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
+            //excelApp.Visible = false;
+            //excelApp.Workbooks.Add(Type.Missing);
+            //Microsoft.Office.Interop.Excel._Worksheet worksheet = (Microsoft.Office.Interop.Excel._Worksheet)excelApp.ActiveSheet;
 
+            //for (int i = 0; i < dataGridView.Columns.Count; i++)
+            //{
+            //    worksheet.Cells[1, i + 1] = dataGridView.Columns[i].HeaderText;
+            //}
+
+            //for (int i = 0; i < dataGridView.Rows.Count; i++)
+            //{
+            //    for (int j = 0; j < dataGridView.Columns.Count; j++)
+            //    {
+            //        worksheet.Cells[i + 2, j + 1] = dataGridView.Rows[i].Cells[j].Value.ToString();
+            //    }
+            //}
+
+            //worksheet.SaveAs(filePath);
+            //excelApp.Quit();
+            //ReleaseObject(worksheet);
+            //ReleaseObject(excelApp);
         }
-
 
         private void ReleaseObject(object obj)
         {
-            try
-            {
-                System.Runtime.InteropServices.Marshal.ReleaseComObject(obj);
-                obj = null;
-            }
-            catch (Exception ex)
-            {
-                obj = null;
-                MessageBox.Show("Exception Occured while releasing object " + ex.ToString());
-            }
-            finally
-            {
-                GC.Collect();
-            }
+            //try
+            //{
+            //    System.Runtime.InteropServices.Marshal.ReleaseComObject(obj);
+            //    obj = null;
+            //}
+            //catch (Exception ex)
+            //{
+            //    obj = null;
+            //    MessageBox.Show("Exception Occured while releasing object " + ex.ToString());
+            //}
+            //finally
+            //{
+            //    GC.Collect();
+            //}
         }
+
+
+        
 
         private void txtSearchContract_KeyDown(object sender, KeyEventArgs e)
         {

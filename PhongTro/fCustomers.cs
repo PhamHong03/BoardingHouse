@@ -166,5 +166,47 @@ namespace PhongTro
         {
 
         }
+
+        private void txtPhoneCustomer_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) & !Char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+
+        }
+
+        private void txtCccdCustomer_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) & !Char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+
+        }
+
+        private void txtPhoneCustomer_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtPhoneCustomer_Leave(object sender, EventArgs e)
+        {
+            if (txtPhoneCustomer.Text.Length != 10)
+            {
+                MessageBox.Show("Số điện thoại phải có đúng 10 số!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtPhoneCustomer.Focus();
+            }
+
+        }
+
+        private void txtCccdCustomer_Leave(object sender, EventArgs e)
+        {
+            if (txtCccdCustomer.Text.Length != 12)
+            {
+                MessageBox.Show("Số căn cước công dân phải có đúng 12 số!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtCccdCustomer.Focus();
+            }
+        }
     }
 }

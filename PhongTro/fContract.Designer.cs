@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fContract));
             panel1 = new Panel();
             dateTimePickerContractExpire = new DateTimePicker();
-            btnExportContract = new Button();
             btnResetContract = new Button();
             btnDeleteContract = new Button();
             btnEditContract = new Button();
@@ -65,7 +64,6 @@
             // 
             panel1.BackColor = Color.LavenderBlush;
             panel1.Controls.Add(dateTimePickerContractExpire);
-            panel1.Controls.Add(btnExportContract);
             panel1.Controls.Add(btnResetContract);
             panel1.Controls.Add(btnDeleteContract);
             panel1.Controls.Add(btnEditContract);
@@ -95,19 +93,6 @@
             dateTimePickerContractExpire.Name = "dateTimePickerContractExpire";
             dateTimePickerContractExpire.Size = new Size(270, 27);
             dateTimePickerContractExpire.TabIndex = 19;
-            // 
-            // btnExportContract
-            // 
-            btnExportContract.BackColor = Color.AliceBlue;
-            btnExportContract.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 163);
-            btnExportContract.ForeColor = Color.MidnightBlue;
-            btnExportContract.Location = new Point(154, 133);
-            btnExportContract.Name = "btnExportContract";
-            btnExportContract.Size = new Size(120, 49);
-            btnExportContract.TabIndex = 18;
-            btnExportContract.Text = "Xuất file";
-            btnExportContract.UseVisualStyleBackColor = false;
-            btnExportContract.Click += btnExportContract_Click;
             // 
             // btnResetContract
             // 
@@ -413,7 +398,6 @@
         private ComboBox comboBoxLoadCustomer;
         private Button btnSaveContract;
         private Button btnAddCustomer;
-        private Button btnExportContract;
         private Button btnResetContract;
         private Button btnDeleteContract;
         private Button btnEditContract;

@@ -40,7 +40,6 @@
             txtWaterOrderDetail = new TextBox();
             comboBoxContract = new ComboBox();
             txtIdOrder = new TextBox();
-            btnExportOrderDetail = new Button();
             label1 = new Label();
             btnResetOrderDetail = new Button();
             btnDeleteOrderDetail = new Button();
@@ -109,7 +108,6 @@
             panel1.Controls.Add(txtWaterOrderDetail);
             panel1.Controls.Add(comboBoxContract);
             panel1.Controls.Add(txtIdOrder);
-            panel1.Controls.Add(btnExportOrderDetail);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(btnResetOrderDetail);
             panel1.Controls.Add(btnDeleteOrderDetail);
@@ -152,7 +150,7 @@
             btnDetail.BackColor = Color.AliceBlue;
             btnDetail.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 163);
             btnDetail.ForeColor = Color.MidnightBlue;
-            btnDetail.Location = new Point(314, 122);
+            btnDetail.Location = new Point(164, 120);
             btnDetail.Name = "btnDetail";
             btnDetail.Size = new Size(142, 49);
             btnDetail.TabIndex = 45;
@@ -167,6 +165,7 @@
             txtElectOrderDetail.Name = "txtElectOrderDetail";
             txtElectOrderDetail.Size = new Size(151, 30);
             txtElectOrderDetail.TabIndex = 44;
+            txtElectOrderDetail.KeyPress += txtElectOrderDetail_KeyPress;
             // 
             // txtWaterOrderDetail
             // 
@@ -175,6 +174,7 @@
             txtWaterOrderDetail.Name = "txtWaterOrderDetail";
             txtWaterOrderDetail.Size = new Size(151, 30);
             txtWaterOrderDetail.TabIndex = 43;
+            txtWaterOrderDetail.KeyPress += txtWaterOrderDetail_KeyPress;
             // 
             // comboBoxContract
             // 
@@ -196,18 +196,6 @@
             txtIdOrder.ReadOnly = true;
             txtIdOrder.Size = new Size(184, 30);
             txtIdOrder.TabIndex = 23;
-            // 
-            // btnExportOrderDetail
-            // 
-            btnExportOrderDetail.BackColor = Color.AliceBlue;
-            btnExportOrderDetail.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 163);
-            btnExportOrderDetail.ForeColor = Color.MidnightBlue;
-            btnExportOrderDetail.Location = new Point(153, 120);
-            btnExportOrderDetail.Name = "btnExportOrderDetail";
-            btnExportOrderDetail.Size = new Size(120, 49);
-            btnExportOrderDetail.TabIndex = 40;
-            btnExportOrderDetail.Text = "Xuất file";
-            btnExportOrderDetail.UseVisualStyleBackColor = false;
             // 
             // label1
             // 
@@ -404,7 +392,6 @@
         private TextBox txtSearchOrderDetails;
         private Button btnSearchOrderDtail;
         private TextBox txtIdOrder;
-        private Button btnExportOrderDetail;
         private Label label1;
         private Button btnResetOrderDetail;
         private Button btnDeleteOrderDetail;

@@ -115,5 +115,16 @@ namespace PhongTro
             fPrintRoom.Location = pictureBoxLocation;
             fPrintRoom.Show();
         }
+
+        private void textBox4_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                string tukhoa = txtSearchAccount.Text;
+                string sql = "SELECT * FROM ACCOUNT WHERE DISPLAYNAME LIKE '%" + tukhoa + "%'";
+
+                func.LoadAccount(dataGridViewLoadlistAccount, conn, sql);
+            }
+        }
     }
 }
